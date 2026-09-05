@@ -21,15 +21,15 @@
 // ==/UserScript==
 
 const FICTION_REGEX = new RegExp(
-  /^https:\/\/www.royalroad.com\/fiction\/\d+?\/[^\/]+$/
+  /^https:\/\/www.royalroad.com\/fiction\/\d+?\/[^\/]+$/,
 );
 const CHAPTER_REGEX = new RegExp(
-  /^https:\/\/www.royalroad.com\/fiction\/\d+?\/[^\/]+\/chapter\/\d+?\/[^\/]+$/
+  /^https:\/\/www.royalroad.com\/fiction\/\d+?\/[^\/]+\/chapter\/\d+?\/[^\/]+$/,
 );
 // Not sure if this is the correct name for it, but it's an exception I found in
 // https://www.royalroad.com/fiction/chapter/1671376?fid=52639&fslug=edge-cases-complete
 const CORRUPTED_CHAPTER_REGEX = new RegExp(
-  /^https:\/\/www.royalroad.com\/fiction\/chapter\/\d+?([^\d\/][^\/]*)?$/
+  /^https:\/\/www.royalroad.com\/fiction\/chapter\/\d+?([^\d\/][^\/]*)?$/,
 );
 const PARSER = new DOMParser();
 
@@ -79,12 +79,12 @@ async function setupFictionPageDownload() {
   }
 
   const royalroad_button_computed_style = getComputedStyle(
-    document.querySelector("a.button-icon-large")
+    document.querySelector("a.button-icon-large"),
   );
 
   // The page has multiple sets of buttons for different widths
   const royalroad_3_button_rows = document.querySelectorAll(
-    "div.row.reduced-gutter"
+    "div.row.reduced-gutter",
   );
 
   for (const button_row of royalroad_3_button_rows) {
@@ -105,7 +105,7 @@ async function setupFictionPageDownload() {
     progress_bar.style.height =
       royalroad_button_computed_style.borderBottomWidth;
     progress_bar.style.background = getComputedStyle(
-      document.querySelector("a.btn-primary")
+      document.querySelector("a.btn-primary"),
     ).backgroundColor;
     progress_bar.style.width = "0";
     progress_bar.className = "rtonne-royalroad-download-button-progress-bar";
@@ -166,7 +166,7 @@ async function setupFictionPageDownload() {
       const end_index = Number(end_select.value);
       const chosen_chapters_metadata_list = chapter_metadata_list.slice(
         start_index,
-        end_index + 1
+        end_index + 1,
       );
       let before_metadata;
       if (start_index > 0) {
@@ -179,13 +179,13 @@ async function setupFictionPageDownload() {
       downloadChapters(
         chosen_chapters_metadata_list,
         before_metadata,
-        after_metadata
+        after_metadata,
       );
     });
 
     start_select.addEventListener("change", () => {
       const all_start_selects = document.querySelectorAll(
-        "select.rtonne-royalroad-download-button-start-select"
+        "select.rtonne-royalroad-download-button-start-select",
       );
       for (const select of all_start_selects) {
         select.value = start_select.value;
@@ -194,7 +194,7 @@ async function setupFictionPageDownload() {
 
     end_select.addEventListener("change", () => {
       const all_end_selects = document.querySelectorAll(
-        "select.rtonne-royalroad-download-button-end-select"
+        "select.rtonne-royalroad-download-button-end-select",
       );
       for (const select of all_end_selects) {
         select.value = end_select.value;
@@ -218,7 +218,7 @@ async function setupChapterPageDownload() {
   button.appendChild(button_text);
 
   const royalroad_fiction_page_button = document.querySelector(
-    "a.btn.btn-block.btn-primary"
+    "a.btn.btn-block.btn-primary",
   );
   const royalroad_rss_button = document.querySelector("a.btn-sm.yellow-gold");
 
@@ -230,7 +230,7 @@ async function setupChapterPageDownload() {
   button.classList.add("btn-sm");
   button.setAttribute(
     "style",
-    "border-radius: 4px !important; margin-right: 5px;"
+    "border-radius: 4px !important; margin-right: 5px;",
   );
   royalroad_rss_button.before(button);
 
@@ -243,7 +243,7 @@ async function setupChapterPageDownload() {
   };
 
   button_clone.addEventListener("click", () =>
-    downloadChapters([chapter_metadata])
+    downloadChapters([chapter_metadata]),
   );
   button.addEventListener("click", () => downloadChapters([chapter_metadata]));
 }
@@ -258,16 +258,16 @@ async function setupChapterPageDownload() {
 async function downloadChapters(
   chapter_metadata_list,
   before_metadata = undefined,
-  after_metadata = undefined
+  after_metadata = undefined,
 ) {
   const fiction_buttons = document.querySelectorAll(
-    "a.rtonne-royalroad-download-button-fiction-button"
+    "a.rtonne-royalroad-download-button-fiction-button",
   );
   const chapter_buttons = document.querySelectorAll(
-    "a.rtonne-royalroad-download-button-chapter-button"
+    "a.rtonne-royalroad-download-button-chapter-button",
   );
   const progress_bars = document.querySelectorAll(
-    "div.rtonne-royalroad-download-button-progress-bar"
+    "div.rtonne-royalroad-download-button-progress-bar",
   );
   // Disable all the download buttons
   for (const button of fiction_buttons) {
@@ -301,7 +301,7 @@ async function downloadChapters(
     const html = await fetchChapterHtml(chapter_metadata.url);
     if (!html) {
       console.warn(
-        `The chapter with the url ${chapter_metadata.url} couldn't be fetched.`
+        `The chapter with the url ${chapter_metadata.url} couldn't be fetched.`,
       );
       failed_chapter_fetch = true;
       continue;
@@ -311,7 +311,7 @@ async function downloadChapters(
     // This is done in the loop so we don't have to fetch 1 extra time
     if (!fiction_name) {
       const fiction_url = html.querySelector(
-        "div.fic-header > div > div.col-lg-6 > a"
+        "div.fic-header > div > div.col-lg-6 > a",
       ).href;
       const fiction_url_split = fiction_url.split("/");
       fiction_name = fiction_url_split[fiction_url_split.length - 1];
@@ -321,7 +321,7 @@ async function downloadChapters(
     const chapter_filename = await getChapterFilename(
       chapter_metadata.url,
       chapter_metadata.date,
-      html
+      html,
     );
 
     let prev_date;
@@ -341,7 +341,7 @@ async function downloadChapters(
       chapter_metadata.url,
       html,
       prev_date,
-      next_date
+      next_date,
     );
     for (const image of processed_chapter.images) {
       zip.file(`${fiction_name}/${image.path}`, image.blob);
@@ -355,7 +355,7 @@ async function downloadChapters(
 
     zip.file(
       `${fiction_name}/${chapter_filename}`,
-      processed_chapter.html_string
+      processed_chapter.html_string,
     );
 
     // Change the progress bars
@@ -371,7 +371,7 @@ async function downloadChapters(
   }
   if (failed_button) {
     alert(
-      "1 or more Previous/Next buttons's links couldn't be changed. More info in the console."
+      "1 or more Previous/Next buttons's links couldn't be changed. More info in the console.",
     );
   }
   if (failed_chapter_fetch) {
@@ -436,25 +436,24 @@ async function processChapterHtml(chapter_url, html, prev_date, next_date) {
 
   // Edit the header links so they work offline
   const chapter_header = html.querySelector(
-    "div.fic-header > div > div.col-lg-6"
+    "div.fic-header > div > div.col-lg-6",
   );
   const chapter_header_links = chapter_header.querySelectorAll("a");
   for (const link of chapter_header_links) {
     // This may seem redundant, but .href returns the whole URL
     link.setAttribute("href", link.href);
   }
-  chapter_header.querySelector(
-    "h1"
-  ).innerHTML = `<a href="${chapter_url}" class="font-white">${
-    chapter_header.querySelector("h1").innerHTML
-  }</a>`;
+  chapter_header.querySelector("h1").innerHTML =
+    `<a href="${chapter_url}" class="font-white">${
+      chapter_header.querySelector("h1").innerHTML
+    }</a>`;
 
   // Add publishing date and last edit date to the header
   // Not using html.querySelector(".profile-info > ul") so that we only get the date items
   const dates_container = document.createElement("ul");
   dates_container.className = "list-inline";
   const date_elements = html.querySelectorAll(
-    ".profile-info > ul > li:has(i[title='Published']), .profile-info > ul > li:has(i[title='Last Edit'])"
+    ".profile-info > ul > li:has(i[title='Published']), .profile-info > ul > li:has(i[title='Last Edit'])",
   );
   for (const element of date_elements) {
     const date_time_element = element.querySelector("time");
@@ -509,14 +508,14 @@ async function processChapterHtml(chapter_url, html, prev_date, next_date) {
             const image_path = turnImageUrlIntoFilepath(img_element.src);
             img_element.setAttribute(
               "onerror",
-              `this.onerror=null; this.src='${img_element.src}'`
+              `this.onerror=null; this.src='${img_element.src}'`,
             );
             img_element.src = image_path;
             images.push({ path: image_path, blob: request.response });
           } catch (err) {
             console.warn(
               `Failed to download image with the url ${img_element.src}, on the chapter with the url ${chapter_url}`,
-              err
+              err,
             );
             failed_image = true;
           }
@@ -540,7 +539,7 @@ async function processChapterHtml(chapter_url, html, prev_date, next_date) {
           chapter_filename = await getChapterFilename(button.href, prev_date);
           if (!chapter_filename) {
             console.warn(
-              `The url of the Previous button of the chapter with the url ${chapter_url} couldn't be changed.`
+              `The url of the Previous button of the chapter with the url ${chapter_url} couldn't be changed.`,
             );
             chapter_filename = ".";
             failed_button = true;
@@ -549,7 +548,7 @@ async function processChapterHtml(chapter_url, html, prev_date, next_date) {
           chapter_filename = await getChapterFilename(button.href, next_date);
           if (!chapter_filename) {
             console.warn(
-              `The url of the Next button of the chapter with the url ${chapter_url} couldn't be changed.`
+              `The url of the Next button of the chapter with the url ${chapter_url} couldn't be changed.`,
             );
             chapter_filename = ".";
             failed_button = true;
@@ -628,7 +627,7 @@ async function fetchChapterMetadataList(url = null) {
       .catch((error) => {
         // If we can't get the list, nothing else would work so we can just throw.
         alert(
-          "An error has ocurred while fetching the chapter list. Please refresh and try again. More details in the console."
+          "An error has ocurred while fetching the chapter list. Please refresh and try again. More details in the console.",
         );
         throw error;
       });
@@ -668,7 +667,7 @@ async function fetchChapterMetadataList(url = null) {
 async function getChapterFilename(
   chapter_url,
   date = undefined,
-  html = undefined
+  html = undefined,
 ) {
   const use_chapter_id_as_prefix =
     (await GM.getValue("filename_prefix", "publish_date")) === "chapter_id";
@@ -991,7 +990,7 @@ hr {
   */
   const no_newlines_header = header.replace(
     /^\s+|(\s*\n)|(\s+(?=[\{\(\}\)\/:,<>]))|((?<=[\{\(\}\)\/:,<>])\s+)/gm,
-    ""
+    "",
   );
   return no_newlines_header;
 }
