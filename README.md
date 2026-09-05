@@ -37,7 +37,7 @@ Tags: Royal Road, RoyalRoad, RR, Web Novel, royalroad.com
 
 ---
 
-![Image of the button on a fiction page](https://github.com/p-laranjinha/userscripts/raw/master/Royal%20Road%20Download%20Button/images/fiction_button.png)
-![Image of the button on the top of a chapter page](https://github.com/p-laranjinha/userscripts/raw/master/Royal%20Road%20Download%20Button/images/chapter_top_button.png)
-![Image of the button on the bottom of a chapter page](https://github.com/p-laranjinha/userscripts/raw/master/Royal%20Road%20Download%20Button/images/chapter_bottom_button.png)
-![Image of the options in violentmonkey](https://github.com/p-laranjinha/userscripts/raw/master/Royal%20Road%20Download%20Button/images/options.png)
+![Image of the button on a fiction page](https://raw.githubusercontent.com/OrangePebble/userscript-royalroad-download-button/master/images/fiction_button.png)
+![Image of the button on the top of a chapter page](https://raw.githubusercontent.com/OrangePebble/userscript-royalroad-download-button/master/images/chapter_top_button.png)
+![Image of the button on the bottom of a chapter page](https://raw.githubusercontent.com/OrangePebble/userscript-royalroad-download-button/master/images/chapter_bottom_button.png)
+![Image of the options in violentmonkey](https://raw.githubusercontent.com/OrangePebble/userscript-royalroad-download-button/master/images/options.png)

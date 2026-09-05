@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name        Royal Road Download Button
 // @license     MIT
-// @namespace   rtonne
+// @namespace   orangepebble
 // @match       https://www.royalroad.com/fiction/*
 // @icon        https://www.google.com/s2/favicons?sz=64&domain=royalroad.com
 // @version     6.6
-// @author      Rtonne
+// @author      OrangePebble
 // @description Adds buttons to download Royal Road chapters
 // The following @require is needed for jszip to work with @grant
 // @require     data:application/javascript,window.setImmediate%20%3D%20window.setImmediate%20%7C%7C%20((f%2C%20...args)%20%3D%3E%20window.setTimeout(()%20%3D%3E%20f(args)%2C%200))%3B
