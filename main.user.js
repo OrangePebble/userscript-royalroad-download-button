@@ -4,7 +4,7 @@
 // @namespace   rtonne
 // @match       https://www.royalroad.com/fiction/*
 // @icon        https://www.google.com/s2/favicons?sz=64&domain=royalroad.com
-// @version     6.5
+// @version     6.6
 // @author      Rtonne
 // @description Adds buttons to download Royal Road chapters
 // The following @require is needed for jszip to work with @grant
@@ -21,15 +21,15 @@
 // ==/UserScript==
 
 const FICTION_REGEX = new RegExp(
-  /^https:\/\/www.royalroad.com\/fiction\/\d+?\/[^\/]+\/?$/,
+  /^https:\/\/www.royalroad.com\/fiction\/\d+\/[^\/]+\/?[^\/]*$/,
 );
 const CHAPTER_REGEX = new RegExp(
-  /^https:\/\/www.royalroad.com\/fiction\/\d+?\/[^\/]+\/chapter\/\d+?\/[^\/]+\/?$/,
+  /^https:\/\/www.royalroad.com\/fiction\/\d+\/[^\/]+\/chapter\/\d+\/[^\/]+\/?[^\/]*$/,
 );
 // Not sure if this is the correct name for it, but it's an exception I found in
 // https://www.royalroad.com/fiction/chapter/1671376?fid=52639&fslug=edge-cases-complete
 const CORRUPTED_CHAPTER_REGEX = new RegExp(
-  /^https:\/\/www.royalroad.com\/fiction\/chapter\/\d+?([^\d\/][^\/]*)?\/?$/,
+  /^https:\/\/www.royalroad.com\/fiction\/chapter\/\d+\/?[^\/]*$/,
 );
 const PARSER = new DOMParser();
 
