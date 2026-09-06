@@ -1,0 +1,30 @@
+<div class="w-1/4 md:w-auto flex-shrink-0">
+  <div class="relative font-light group flex flex-col w-full md:w-auto">
+    <div
+      class="group"
+      tabindex="0"
+      role="button"
+      aria-haspopup="menu"
+      aria-expanded="false"
+    >
+      <button
+        id="orangepebble-form-toggle"
+        type="button"
+        class="inline-flex items-center gap-2 cursor-pointer whitespace-nowrap rounded-theme font-medium tracking-wide text-center active:opacity-100 disabled:opacity-55 disabled:cursor-not-allowed no-underline transform active:scale-90 motion-reduce:transition-none transition-all duration-150 bg-secondary text-on-secondary hover:brightness-110 hover:text-on-surface-strong hover:shadow-md focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 focus-visible:outline-none px-4 py-2 text-md w-full h-14 justify-center border border-on-surface/20"
+        aria-label="Download"
+        tabindex="0"
+      >
+        <span class="md:hidden text-xs">Download</span>
+        <i class="fa-solid fa-download"></i>
+      </button>
+    </div>
+
+    <div
+      id="orangepebble-form"
+      class="absolute hidden w-fit flex-col overflow-hidden rounded-md bg-surface-alt border-1 shadow-on-surface/40 dark:shadow-primary/15 border-on-surface/25 dark:bg-surface-dark-alt shadow-lg z-50 top-full left-0 mt-1 flex"
+      style="position: fixed"
+    >
+      <div style="width: 100px; height: 100px"></div>
+    </div>
+  </div>
+</div>
