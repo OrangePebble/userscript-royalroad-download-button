@@ -19,12 +19,64 @@
       </button>
     </div>
 
-    <div
+    <form
       id="orangepebble-form"
-      class="absolute hidden w-fit flex-col overflow-hidden rounded-md bg-surface-alt border-1 shadow-on-surface/40 dark:shadow-primary/15 border-on-surface/25 dark:bg-surface-dark-alt shadow-lg z-50 top-full left-0 mt-1 flex"
-      style="position: fixed"
+      class="form-group hidden absolute w-fit flex-col overflow-hidden rounded-md bg-surface-alt border-1 shadow-on-surface/40 dark:shadow-primary/15 border-on-surface/25 dark:bg-surface-dark-alt shadow-lg z-50 top-full left-0 mt-1 flex gap-6 pb-5 px-5 pt-3"
+      style="position: fixed; width: 400px"
     >
-      <div style="width: 100px; height: 100px"></div>
-    </div>
+      <div class="space-y-2">
+        <label
+          for="orangepebble-file-input"
+          class="block text-sm font-semibold text-on-surface-strong tracking-wider"
+        >
+          Select a file to extend
+        </label>
+        <style>
+          #orangepebble-form input[type="file"]::file-selector-button {
+            margin-right: 5px;
+            padding: 1px 6px;
+            color: ButtonText;
+            background-color: ButtonFace;
+            border: 1px solid ButtonBorder;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: var(--font-weight-medium);
+          }
+          #orangepebble-form input[type="file"]::file-selector-button:hover {
+            background-color: color-mix(in srgb, ButtonFace 92%, ButtonText);
+            border-style: inset;
+          }
+          #orangepebble-form input[type="file"]::file-selector-button:active {
+            background-color: color-mix(in srgb, ButtonFace 85%, ButtonText);
+            border-style: inset;
+          }
+        </style>
+        <input
+          id="orangepebble-file-input"
+          type="file"
+          class="text-on-surface-strong"
+          style="display: block; width: 100%"
+        />
+      </div>
+      <div class="space-y-2">
+        <label
+          for="orangepebble-from-chapter-select"
+          class="block text-sm font-semibold text-on-surface-strong tracking-wider"
+        >
+          Select a the start chapter
+        </label>
+        <select
+          id="orangepebble-from-chapter-select"
+          class="inline-flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap rounded-theme font-medium tracking-wide text-center active:opacity-100 hover:shadow-sm disabled:opacity-55 disabled:cursor-not-allowed no-underline transform active:scale-90 motion-reduce:transition-none bg-surface/30 hover:bg-surface/65 hover:brightness-125 text-on-surface-strong border border-on-surface/20 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-on-surface/50 focus-visible:ring-offset-2 focus-visible:outline-none px-4 py-2 text-md text-left"
+          style="width: 100%; text-overflow: ellipsis"
+        >
+          <option value="0" selected>1: Chapter 1</option>
+          <option value="1">
+            2: Chapter 2 - Electric Boogaloo 2 the flying SHEEP that don't let
+            me sleep
+          </option>
+        </select>
+      </div>
+    </form>
   </div>
 </div>

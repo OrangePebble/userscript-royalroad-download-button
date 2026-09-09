@@ -23,7 +23,7 @@
 
 // INFO: In order to run local files I can use a simple webserver to serve all the files in this folder.
 // I can't use "file://" because it is blocked either by Firefox or Violentmonkey.
-// I found "https://github.com/vercel/serve" that to run I only to execute ", serve .".
+// I found "https://github.com/vercel/serve" that I can run with just ", serve .".
 
 const FICTION_BUTTON = (() => {
   const template = document.createElement("template");
