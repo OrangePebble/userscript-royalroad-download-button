@@ -20,6 +20,7 @@
 // @grant       GM.getResourceText
 // @resource    FICTION_BUTTON_HTML http://localhost:3000/fiction-button
 // @require     http://localhost:3000/add-fiction-button.js
+// @require     http://localhost:3000/get-chapter-list.js
 // ==/UserScript==
 
 // INFO: In order to run local files I can use a simple webserver to serve all the files in this folder.
@@ -41,8 +42,11 @@ const IS_OLD_UI = document.getElementById("beta-switcher") !== null;
 
 const PARSER = new DOMParser();
 
-if (!IS_OLD_UI) {
-  if (FICTION_REGEX.test(window.location.href)) {
-    addFictionButton();
+(async () => {
+  if (!IS_OLD_UI) {
+    if (FICTION_REGEX.test(window.location.href)) {
+      addFictionButton();
+      console.log(await getChapterList());
+    }
   }
-}
+})();
