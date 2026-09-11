@@ -1,6 +1,22 @@
+function _fillChapterSelects(chapter_list) {
+  let start_select = document.getElementById(
+    "orangepebble-start-chapter-select",
+  );
+  let end_select = document.getElementById("orangepebble-end-chapter-select");
+  for (const [index, { title }] of chapter_list.entries()) {
+    const option = document.createElement("option");
+    option.value = index;
+    option.innerText = title;
+    start_select.append(option);
+    end_select.append(option.cloneNode(true));
+    start_select.firstChild.setAttribute("selected", "selected");
+    end_select.lastChild.setAttribute("selected", "selected");
+  }
+}
+
 /**
  * Adds the download button to the fiction page.
- * @param {(chapter_list: {title: string, url: string}[]) => void} onChapterListReady
+ * @param {(chapter_list: {title: string, url: string}[]) => void} onChapterListReady To lazy load the chapter list only when the toggle is first clicked
  */
 function addFictionButton(onChapterListReady) {
   const template = document.createElement("template");
@@ -29,21 +45,7 @@ function addFictionButton(onChapterListReady) {
       firstClick = false;
       let chapter_list = await getChapterList();
       onChapterListReady(chapter_list);
-      let start_select = document.getElementById(
-        "orangepebble-start-chapter-select",
-      );
-      let end_select = document.getElementById(
-        "orangepebble-end-chapter-select",
-      );
-      for (const [index, { title }] of chapter_list.entries()) {
-        const option = document.createElement("option");
-        option.value = index;
-        option.innerText = title;
-        start_select.append(option);
-        end_select.append(option.cloneNode(true));
-        start_select.firstChild.setAttribute("selected", "selected");
-        end_select.lastChild.setAttribute("selected", "selected");
-      }
+      _fillChapterSelects(chapter_list);
     }
   });
 
