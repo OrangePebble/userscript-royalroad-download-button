@@ -33,22 +33,36 @@
         </label>
         <style>
           #orangepebble-form input[type="file"]::file-selector-button {
-            margin-right: 5px;
-            padding: 1px 6px;
-            color: ButtonText;
-            background-color: ButtonFace;
-            border: 1px solid ButtonBorder;
-            border-radius: 4px;
+            color: var(--text-on-surface);
+            background-color: color-mix(
+              in oklab,
+              var(--color-surface) 30%,
+              transparent
+            );
+            border-color: color-mix(
+              in oklab,
+              var(--color-on-surface) 20%,
+              transparent
+            );
+            border-style: var(--tw-border-style);
+            border-width: 1px;
+            border-radius: var(--border-radius);
             cursor: pointer;
             font-weight: var(--font-weight-medium);
+            padding-block: var(--spacing);
+            padding-inline: calc(var(--spacing) * 2);
+            margin-right: calc(var(--spacing) * 2);
+            transition-duration: 0.2s;
           }
           #orangepebble-form input[type="file"]::file-selector-button:hover {
-            background-color: color-mix(in srgb, ButtonFace 92%, ButtonText);
-            border-style: inset;
+            background-color: color-mix(
+              in oklab,
+              var(--color-surface) 65%,
+              transparent
+            );
           }
-          #orangepebble-form input[type="file"]::file-selector-button:active {
-            background-color: color-mix(in srgb, ButtonFace 85%, ButtonText);
-            border-style: inset;
+          #orangepebble-form input[type="file"]:active::file-selector-button {
+            scale: 90% 90%;
           }
         </style>
         <input
@@ -57,14 +71,24 @@
           class="text-on-surface-strong mb-0"
           style="display: block; width: 100%"
         />
-        <label hidden class="checkbox text-on-surface-strong">
-          <input
-            id="orangepebble-update-metadata-checkbox"
-            checked
+        <label
+          for="orangepebble-update-metadata-toggle"
+          class="inline-flex items-center gap-3 peer mb-0 text-on-surface-strong"
+          hidden
+          ><input
+            id="orangepebble-update-metadata-toggle"
             type="checkbox"
+            class="peer sr-only"
+            role="checkbox"
+            value="true"
+            checked
           />
-          Update metadata
-        </label>
+          <div
+            class="h-6 min-w-11 w-11 after:h-5 after:w-5 peer-checked:after:translate-x-5 relative rounded-full after:absolute after:bottom-0 after:top-0 after:my-auto after:rounded-full after:transition-all after:content-[''] after:left-[0.0625rem] bg-on-surface-strong/50 transition-colors after:bg-surface-alt peer-checked:bg-on-surface-strong peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline-outline-strong peer-focus:peer-checked:outline-primary peer-active:outline-offset-0 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            aria-hidden="true"
+          ></div>
+          Update metadata</label
+        >
       </div>
       <div class="space-y-2">
         <label
@@ -77,7 +101,9 @@
           id="orangepebble-start-chapter-select"
           class="inline-flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap rounded-theme font-medium tracking-wide text-center active:opacity-100 hover:shadow-sm disabled:opacity-55 disabled:cursor-not-allowed no-underline transform active:scale-90 motion-reduce:transition-none bg-surface/30 hover:bg-surface/65 hover:brightness-125 text-on-surface-strong border border-on-surface/20 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-on-surface/50 focus-visible:ring-offset-2 focus-visible:outline-none px-4 py-2 text-md text-left"
           style="width: 100%; text-overflow: ellipsis"
-        ></select>
+        >
+          <option value="1">Browse...</option>
+        </select>
       </div>
       <div class="space-y-2">
         <label
