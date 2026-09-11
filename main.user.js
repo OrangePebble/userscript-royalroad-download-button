@@ -45,8 +45,8 @@ const PARSER = new DOMParser();
 (async () => {
   if (!IS_OLD_UI) {
     if (FICTION_REGEX.test(window.location.href)) {
-      addFictionButton();
-      console.log(await getChapterList());
+      let chapter_list = await getChapterList();
+      addFictionButton(chapter_list);
     }
   }
 })();

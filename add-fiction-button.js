@@ -1,7 +1,8 @@
 /**
  * Adds the download button to the fiction page.
+ * @param {{title: string, url: string}[]} [chapter_list]
  */
-function addFictionButton() {
+function addFictionButton(chapter_list) {
   const template = document.createElement("template");
   template.innerHTML = GM.getResourceText("FICTION_BUTTON_HTML");
   const button_container = template.content.firstElementChild;
@@ -21,8 +22,8 @@ function addFictionButton() {
   };
 
   toggle.addEventListener("click", () => {
-    positionForm();
     form.classList.toggle("hidden");
+    positionForm();
   });
   window.addEventListener("resize", positionForm);
   window.addEventListener("scroll", positionForm, true);
@@ -40,4 +41,18 @@ function addFictionButton() {
   );
 
   donate_button.after(button_container);
+
+  let start_select = document.getElementById(
+    "orangepebble-start-chapter-select",
+  );
+  let end_select = document.getElementById("orangepebble-end-chapter-select");
+  for (const [index, { title }] of chapter_list.entries()) {
+    const option = document.createElement("option");
+    option.value = index;
+    option.innerText = title;
+    start_select.append(option);
+    end_select.append(option.cloneNode(true));
+    start_select.firstChild.setAttribute("selected", "selected");
+    end_select.lastChild.setAttribute("selected", "selected");
+  }
 }
