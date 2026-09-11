@@ -1,18 +1,10 @@
 <div class="w-1/4 md:w-auto flex-shrink-0">
   <div class="relative font-light group flex flex-col w-full md:w-auto">
-    <div
-      class="group"
-      tabindex="0"
-      role="button"
-      aria-haspopup="menu"
-      aria-expanded="false"
-    >
+    <div class="group">
       <button
         id="orangepebble-form-toggle"
         type="button"
         class="inline-flex items-center gap-2 cursor-pointer whitespace-nowrap rounded-theme font-medium tracking-wide text-center active:opacity-100 disabled:opacity-55 disabled:cursor-not-allowed no-underline transform active:scale-90 motion-reduce:transition-none transition-all duration-150 bg-secondary text-on-secondary hover:brightness-110 hover:text-on-surface-strong hover:shadow-md focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 focus-visible:outline-none px-4 py-2 text-md w-full h-14 justify-center border border-on-surface/20"
-        aria-label="Download"
-        tabindex="0"
       >
         <span class="md:hidden text-xs">Download</span>
         <i class="fa-solid fa-download"></i>
@@ -79,13 +71,11 @@
             id="orangepebble-update-metadata-checkbox"
             type="checkbox"
             class="peer sr-only"
-            role="checkbox"
             value="true"
             checked
           />
           <div
             class="h-6 min-w-11 w-11 after:h-5 after:w-5 peer-checked:after:translate-x-5 relative rounded-full after:absolute after:bottom-0 after:top-0 after:my-auto after:rounded-full after:transition-all after:content-[''] after:left-[0.0625rem] bg-on-surface-strong/50 transition-colors after:bg-surface-alt peer-checked:bg-on-surface-strong peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline-outline-strong peer-focus:peer-checked:outline-primary peer-active:outline-offset-0 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            aria-hidden="true"
           ></div>
           Update metadata</label
         >
@@ -115,6 +105,16 @@
           class="inline-flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap rounded-theme font-medium tracking-wide text-center active:opacity-100 hover:shadow-sm disabled:opacity-55 disabled:cursor-not-allowed no-underline transform active:scale-90 motion-reduce:transition-none bg-surface/30 hover:bg-surface/65 hover:brightness-125 text-on-surface-strong border border-on-surface/20 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-on-surface/50 focus-visible:ring-offset-2 focus-visible:outline-none px-4 py-2 text-md text-left"
           style="width: 100%; text-overflow: ellipsis"
         ></select>
+      </div>
+      <div class="space-y-2">
+        <button
+          id="orangepebble-confirm-download-button"
+          type="button"
+          class="inline-flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap rounded-theme font-medium tracking-wide text-center active:opacity-100 hover:shadow-sm disabled:opacity-55 disabled:cursor-not-allowed no-underline transform active:scale-90 motion-reduce:transition-none bg-surface/30 hover:bg-surface/65 hover:brightness-125 text-on-surface-strong border border-on-surface/20 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-on-surface/50 focus-visible:ring-offset-2 focus-visible:outline-none px-4 py-2 text-md text-left"
+          style="width: 100%"
+        >
+          Confirm download
+        </button>
       </div>
     </form>
   </div>
