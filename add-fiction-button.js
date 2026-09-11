@@ -1,3 +1,6 @@
+/**
+ * Adds the download button to the fiction page.
+ */
 function addFictionButton() {
   const template = document.createElement("template");
   template.innerHTML = GM.getResourceText("FICTION_BUTTON_HTML");

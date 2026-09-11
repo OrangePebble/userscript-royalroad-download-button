@@ -26,8 +26,23 @@
 // I can't use "file://" because it is blocked either by Firefox or Violentmonkey.
 // I found "https://github.com/vercel/serve" that I can run with just ", serve .".
 
+const FICTION_REGEX = new RegExp(
+  /^https:\/\/www.royalroad.com\/fiction\/\d+\/[^\/]+\/?[^\/]*$/,
+);
+const CHAPTER_REGEX = new RegExp(
+  /^https:\/\/www.royalroad.com\/fiction\/\d+\/[^\/]+\/chapter\/\d+\/[^\/]+\/?[^\/]*$/,
+);
+// Not sure if this is the correct name for it, but it's an exception I found in
+// https://www.royalroad.com/fiction/chapter/1671376?fid=52639&fslug=edge-cases-complete
+const CORRUPTED_CHAPTER_REGEX = new RegExp(
+  /^https:\/\/www.royalroad.com\/fiction\/chapter\/\d+\/?[^\/]*$/,
+);
 const IS_OLD_UI = document.getElementById("beta-switcher") !== null;
 
+const PARSER = new DOMParser();
+
 if (!IS_OLD_UI) {
-  addFictionButton();
+  if (FICTION_REGEX.test(window.location.href)) {
+    addFictionButton();
+  }
 }
