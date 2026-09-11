@@ -42,11 +42,17 @@ const IS_OLD_UI = document.getElementById("beta-switcher") !== null;
 
 const PARSER = new DOMParser();
 
+/**
+ * @type {{title: string, url: string}[]}
+ */
+let chapter_list;
+
 (async () => {
   if (!IS_OLD_UI) {
     if (FICTION_REGEX.test(window.location.href)) {
-      let chapter_list = await getChapterList();
-      addFictionButton(chapter_list);
+      addFictionButton((cl) => {
+        chapter_list = cl;
+      });
     }
   }
 })();
