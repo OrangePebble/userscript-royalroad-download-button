@@ -21,6 +21,7 @@
 // @resource    FICTION_BUTTON_HTML http://localhost:3000/fiction-button
 // @require     http://localhost:3000/add-fiction-button.js
 // @require     http://localhost:3000/get-chapter-list.js
+// @require     http://localhost:3000/utils.js
 // ==/UserScript==
 
 // INFO: In order to run local files I can use a simple webserver to serve all the files in this folder.
@@ -56,19 +57,14 @@ let chapter_list;
       document
         .getElementById("orangepebble-confirm-download-button")
         .addEventListener("click", () => {
-          let step = 360 / chapter_list.length;
           let i = 0;
+          disableButton();
           let interval = setInterval(() => {
             i++;
-            let toggle = document.getElementById("orangepebble-form-toggle");
-            let form = document.getElementById("orangepebble-form");
-            form.classList.add("hidden");
-            toggle.style.pointerEvents = "none";
-            toggle.style.background = `conic-gradient(var(--color-secondary) 0deg ${step * i}deg, color-mix(in oklab,var(--color-on-surface)40%,var(--color-secondary)) ${step * i}deg 360deg)`;
+            setProgress(i / chapter_list.length);
             if (i > chapter_list.length + 1) {
               clearInterval(interval);
-              toggle.style.background = "";
-              toggle.style.pointerEvents = "";
+              enableButton();
             }
           }, 100);
         });
