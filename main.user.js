@@ -53,6 +53,25 @@ let chapter_list;
       addFictionButton((cl) => {
         chapter_list = cl;
       });
+      document
+        .getElementById("orangepebble-confirm-download-button")
+        .addEventListener("click", () => {
+          let step = 360 / chapter_list.length;
+          let i = 0;
+          let interval = setInterval(() => {
+            i++;
+            let toggle = document.getElementById("orangepebble-form-toggle");
+            let form = document.getElementById("orangepebble-form");
+            form.classList.add("hidden");
+            toggle.style.pointerEvents = "none";
+            toggle.style.background = `conic-gradient(var(--color-secondary) 0deg ${step * i}deg, color-mix(in oklab,var(--color-on-surface)40%,var(--color-secondary)) ${step * i}deg 360deg)`;
+            if (i > chapter_list.length + 1) {
+              clearInterval(interval);
+              toggle.style.background = "";
+              toggle.style.pointerEvents = "";
+            }
+          }, 100);
+        });
     }
   }
 })();
