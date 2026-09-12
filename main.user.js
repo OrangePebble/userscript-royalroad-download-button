@@ -51,23 +51,16 @@ let chapter_list;
 (async () => {
   if (!IS_OLD_UI) {
     if (FICTION_REGEX.test(window.location.href)) {
-      addFictionButton((cl) => {
-        chapter_list = cl;
+      addFictionButton();
+      let firstClick = true;
+      let toggle = document.getElementById("orangepebble-form-toggle");
+      toggle.addEventListener("click", async () => {
+        if (firstClick) {
+          firstClick = false;
+          chapter_list = await getChapterList();
+          fillChapterSelects(chapter_list);
+        }
       });
-      document
-        .getElementById("orangepebble-confirm-download-button")
-        .addEventListener("click", () => {
-          let i = 0;
-          disableButton();
-          let interval = setInterval(() => {
-            i++;
-            setProgress(i / chapter_list.length);
-            if (i > chapter_list.length + 1) {
-              clearInterval(interval);
-              enableButton();
-            }
-          }, 100);
-        });
     }
   }
 })();

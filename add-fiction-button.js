@@ -1,24 +1,7 @@
-function _fillChapterSelects(chapter_list) {
-  let start_select = document.getElementById(
-    "orangepebble-start-chapter-select",
-  );
-  let end_select = document.getElementById("orangepebble-end-chapter-select");
-  for (const [index, { title }] of chapter_list.entries()) {
-    const option = document.createElement("option");
-    option.value = index;
-    option.innerText = title;
-    start_select.append(option);
-    end_select.append(option.cloneNode(true));
-    start_select.firstChild.setAttribute("selected", "selected");
-    end_select.lastChild.setAttribute("selected", "selected");
-  }
-}
-
 /**
  * Adds the download button to the fiction page.
- * @param {(chapter_list: {title: string, url: string}[]) => void} onChapterListReady To lazy load the chapter list only when the toggle is first clicked
  */
-function addFictionButton(onChapterListReady) {
+function addFictionButton() {
   const template = document.createElement("template");
   template.innerHTML = GM.getResourceText("FICTION_BUTTON_HTML");
   const button_container = template.content.firstElementChild;
@@ -37,16 +20,9 @@ function addFictionButton(onChapterListReady) {
     form.style.left = `${left}px`;
   };
 
-  let firstClick = true;
   toggle.addEventListener("click", async () => {
     form.classList.toggle("hidden");
     positionForm();
-    if (firstClick) {
-      firstClick = false;
-      let chapter_list = await getChapterList();
-      onChapterListReady(chapter_list);
-      _fillChapterSelects(chapter_list);
-    }
   });
 
   window.addEventListener("resize", positionForm);
@@ -65,4 +41,24 @@ function addFictionButton(onChapterListReady) {
   );
 
   donate_button.after(button_container);
+}
+
+/**
+ * Takes the chapter_list and fills the select inputs
+ * @param {{title: string, url: string}[]} chapter_list
+ */
+function fillChapterSelects(chapter_list) {
+  let start_select = document.getElementById(
+    "orangepebble-start-chapter-select",
+  );
+  let end_select = document.getElementById("orangepebble-end-chapter-select");
+  for (const [index, { title }] of chapter_list.entries()) {
+    const option = document.createElement("option");
+    option.value = index;
+    option.innerText = title;
+    start_select.append(option);
+    end_select.append(option.cloneNode(true));
+    start_select.firstChild.setAttribute("selected", "selected");
+    end_select.lastChild.setAttribute("selected", "selected");
+  }
 }
