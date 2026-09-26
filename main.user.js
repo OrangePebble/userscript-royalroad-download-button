@@ -22,6 +22,7 @@
 // @require     http://localhost:3000/add-fiction-button.js
 // @require     http://localhost:3000/get-chapter-list.js
 // @require     http://localhost:3000/get-chapter-content.js
+// @require     http://localhost:3000/process-html.js
 // @require     http://localhost:3000/utils.js
 // ==/UserScript==
 
@@ -123,6 +124,9 @@ let chapter_list;
         for (let i = 0; i < chosen_chapters_list.length; i++) {
           let chapter_content = await getChapterContent(
             chosen_chapters_list[i].url,
+          );
+          chapter_content.chapter_html = await embedImagesAsBase64(
+            chapter_content.chapter_html,
           );
           console.log(
             chapter_content.chapter_html,
