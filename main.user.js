@@ -39,7 +39,8 @@
 //   there is no point in having the options in the Violentmonkey extension. So all options will now stay
 //   in the popup.
 // - Everytime an option in the popup is changed the state is saved and it becomes the default option.
-// - I'll be adding more "console.debug/log/info/warn/error"s everywhere, no point in keeping the console clean.
+// - I'll be adding more "console.debug/info/warn/error"s everywhere, no point in keeping the console clean.
+//   - Don't use "console.log" to let devs filter the other logs and keep their temporary ones.
 // - The downloaded HTML files will save state in the URL (either in the search or hash sections [whatever
 //   I can change without reloading]).
 // - The downloaded HTML files will have options for changing theme, font, and font size.

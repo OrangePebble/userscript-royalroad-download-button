@@ -2,7 +2,7 @@
  * @param {string} chapter_url
  * @returns {Promise<HTMLHtmlElement | void>}
  */
-async function fetchChapterHtml(chapter_url) {
+async function _fetchChapterHtml(chapter_url) {
   const html = await fetch(chapter_url, {
     credentials: "omit",
   })
@@ -18,15 +18,39 @@ async function fetchChapterHtml(chapter_url) {
 }
 
 /**
- * @returns {{chapter_html: HTMLElement, start_note_html: HTMLElement | null, end_note_html: HTMLElement | null}}
+ * @returns {Promise<{chapter_html: HTMLElement, start_note_html: HTMLElement | null, end_note_html: HTMLElement | null}>}
  */
 async function getChapterContent(url = null) {
-  if (
-    (url === null && !CHAPTER_REGEX.test(window.location.href)) ||
-    (url === null && !CORRUPTED_CHAPTER_REGEX.test(window.location.href)) ||
-    (url !== null && !CHAPTER_REGEX.test(url))
-  ) {
-    return null;
+  if (url === null) {
+    if (
+      !CHAPTER_REGEX.test(window.location.href) &&
+      !CORRUPTED_CHAPTER_REGEX.test(window.location.href)
+    ) {
+      return null;
+    }
+  } else {
+    if (!CHAPTER_REGEX.test(url) && !CORRUPTED_CHAPTER_REGEX.test(url)) {
+      return null;
+    }
   }
-  return { chapter_html: 0, start_note_html: 1, end_note_html: null };
+  let chapter_html, start_note_html, end_note_html;
+  if (url === null) {
+    chapter_html = document.getElementsByClassName("chapter-content")[0];
+    start_note_html = document.querySelector(
+      ".author-note-card:has(~ .chapter-content)",
+    );
+    end_note_html = document.querySelector(
+      ".chapter-content ~ .author-note-card",
+    );
+  } else {
+    let html = await _fetchChapterHtml(url);
+    chapter_html = html.getElementsByClassName("chapter-content")[0];
+    start_note_html = html.querySelector(
+      ".author-note-portlet:has(~ .chapter-content)",
+    );
+    end_note_html = html.querySelector(
+      ".chapter-content ~ .author-note-portlet",
+    );
+  }
+  return { chapter_html, start_note_html, end_note_html };
 }
