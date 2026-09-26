@@ -18,7 +18,7 @@ async function _fetchChapterHtml(chapter_url) {
 }
 
 /**
- * @returns {Promise<{chapter_html: HTMLElement, start_note_html: HTMLElement | null, end_note_html: HTMLElement | null}>}
+ * @returns {Promise<{chapter_html: HTMLElement, start_note_html: HTMLElement | null, end_note_html: HTMLElement | null, created_date: string, edited_date: string}>}
  */
 async function getChapterContent(url = null) {
   if (url === null) {
@@ -33,7 +33,7 @@ async function getChapterContent(url = null) {
       return null;
     }
   }
-  let chapter_html, start_note_html, end_note_html;
+  let chapter_html, start_note_html, end_note_html, created_date, edited_date;
   if (url === null) {
     chapter_html = document.getElementsByClassName("chapter-content")[0];
     start_note_html = document.querySelector(
@@ -42,6 +42,16 @@ async function getChapterContent(url = null) {
     end_note_html = document.querySelector(
       ".chapter-content ~ .author-note-card",
     );
+    created_date = document
+      .querySelector(
+        ".chapter > div:last-child > div:last-child > span > div:nth-child(1) > div:nth-child(1) > time",
+      )
+      .getAttribute("datetime");
+    edited_date = document
+      .querySelector(
+        ".chapter > div:last-child > div:last-child > span > div:nth-child(2) > div:nth-child(1) > time",
+      )
+      .getAttribute("datetime");
   } else {
     let html = await _fetchChapterHtml(url);
     chapter_html = html.getElementsByClassName("chapter-content")[0];
@@ -51,6 +61,16 @@ async function getChapterContent(url = null) {
     end_note_html = html.querySelector(
       ".chapter-content ~ .author-note-portlet",
     );
+    created_date = html
+      .querySelector(
+        ".chapter > div:last-child > div:last-child > span > div:nth-child(1) > div:nth-child(1) > time",
+      )
+      .getAttribute("datetime");
+    edited_date = html
+      .querySelector(
+        ".chapter > div:last-child > div:last-child > span > div:nth-child(2) > div:nth-child(1) > time",
+      )
+      .getAttribute("datetime");
   }
   return { chapter_html, start_note_html, end_note_html };
 }

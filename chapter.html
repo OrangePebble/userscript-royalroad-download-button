@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      html {
+        --padding: 0.25rem;
+        --spacing: 0.25rem;
+        --color-on-surface: #fffc;
+        --color-on-surface-strong: #fff;
+        --font-weight-light: 300;
+        --text-base: 1rem;
+        --text-xl: 1.25rem;
+        --text-2xl: 1.5rem;
+        --text-3xl: 1.875rem;
+        --leading-tight: 1.25;
+        --tracking-tight: -0.025em;
+        --font-weight-semibold: 600;
+        --font-weight-medium: 500;
+        --color-surface: #181818;
+        --radius-xs: 0.125rem;
+      }
+      body {
+        background: var(--color-surface);
+        font-family: sans-serif;
+        line-height: 1.42857143;
+        font-size: 16px;
+        margin: 0;
+      }
+      body > div {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        min-height: calc(100vh - 25.65rem);
+      }
+      #header {
+        padding-block: calc(var(--padding) * 4);
+        padding-inline: calc(var(--padding) * 6);
+        min-height: calc(11rem - var(--padding) * 8);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: calc(var(--spacing) * 1.5);
+        box-shadow:
+          rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+          rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+          rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+          rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+          oklab(0 0 0 / 0.3) 0px 4px 6px 0px;
+      }
+      #fiction-title {
+        h2 {
+          color: var(--color-on-surface-strong);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-weight: var(--font-weight-light);
+          font-size: var(--text-xl);
+          line-height: var(--leading-tight);
+          letter-spacing: var(--tracking-tight);
+          margin: 0;
+        }
+      }
+      #chapter-title {
+        h1 {
+          color: var(--color-on-surface-strong);
+          font-weight: var(--font-weight-semibold);
+          font-size: var(--text-2xl);
+          line-height: var(--leading-tight);
+          margin: 0;
+        }
+      }
+      #author {
+        margin-top: auto;
+        h4 {
+          color: var(--color-on-surface-strong);
+          font-weight: var(--font-weight-medium);
+          font-size: var(--text-base);
+          line-height: var(--leading-tight);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin: 0;
+          background-color: color-mix(
+            in oklab,
+            var(--color-surface) 40%,
+            transparent
+          );
+          padding-block: calc(var(--spacing) * 3);
+          padding-inline: calc(var(--spacing) * 4.5);
+          border-radius: var(--radius-xs);
+          border-color: color-mix(
+            in oklab,
+            var(--color-on-surface) 10%,
+            transparent
+          );
+          border-width: 1px;
+          border-style: solid;
+        }
+      }
+      #body {
+        padding-block: calc(var(--padding) * 6);
+        padding-inline: calc(var(--padding) * 2);
+      }
+      @media (min-width: 48rem) {
+        #body {
+          padding-inline: calc(var(--padding) * 6);
+        }
+        #header {
+          padding-block: calc(var(--padding) * 5);
+          padding-inline: calc(var(--padding) * 8);
+          min-height: calc(14rem - var(--padding) * 10);
+        }
+        #fiction-title {
+          h2 {
+            font-size: var(--text-2xl);
+          }
+        }
+        #chapter-title {
+          h1 {
+            font-size: var(--text-3xl);
+          }
+        }
+        #author {
+          h4 {
+            font-size: var(--text-2xl);
+          }
+        }
+      }
+      @media (min-width: 64rem) {
+        body > div {
+          max-width: 64rem;
+        }
+      }
+      @media (min-width: 80rem) {
+        body > div {
+          max-width: 80rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div id="header">
+        <a id="fiction-title">
+          <h2>
+            Technomagica [Progression Fantasy Litrpg] [Book 1 now on kindle!]
+          </h2>
+        </a>
+        <a id="chapter-title"> <h1>1: The Captain of Nevermore</h1></a>
+        <a id="author"> <h4>Vitaly S Alexius</h4></a>
+      </div>
+      <div id="body">
+        <div id="top-nav-buttons">
+          <button id="reading-preferences-button">Reader Preferences</button>
+          <a id="top-prev-button">Previous Chapter</a>
+          <a id="top-next-button">Next Chapter</a>
+        </div>
+        <div id="start-note"></div>
+        <div id="chapter-content">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut justo
+            augue, molestie in rhoncus tristique, rhoncus id eros. Cras
+            fringilla mauris sit amet tortor tincidunt posuere. Nunc et ligula
+            id nisl pellentesque convallis. Vestibulum egestas lorem iaculis,
+            commodo est eu, rhoncus lectus. Aliquam vitae ultrices mi. Etiam
+            sagittis ultrices augue non hendrerit. Vivamus at venenatis elit.
+            Nulla gravida tellus et felis porttitor eleifend. Nulla facilisi.
+            Aliquam convallis pharetra odio, nec fermentum diam dictum eu. Ut
+            augue sapien, semper eget aliquam nec, congue maximus ipsum. Vivamus
+            sodales bibendum odio, eu dignissim nibh egestas at. Donec commodo
+            congue lorem eu accumsan. Etiam aliquet risus vel malesuada
+            suscipit.
+          </p>
+          <p>
+            Mauris in sem eget ex semper porta non ut est. Vivamus hendrerit
+            sapien id nunc venenatis posuere. Integer id lacus ut nulla sodales
+            mattis eget nec leo. Nam varius orci dapibus placerat semper. Nulla
+            id augue ut arcu varius vestibulum a mollis lorem. Phasellus id
+            risus vel felis laoreet tempor tincidunt et elit. Curabitur placerat
+            felis a rhoncus convallis. Proin lacinia placerat ex, quis auctor
+            sapien. Nullam in rutrum elit. Nulla pharetra quis mauris eget
+            malesuada. Phasellus consectetur eget ipsum vel feugiat. Aliquam
+            mauris elit, interdum id porta eu, iaculis a dolor. Aenean efficitur
+            quis justo eu posuere. Mauris a urna eu libero efficitur molestie in
+            sed risus.
+          </p>
+          <p>
+            Morbi nec diam eget nulla pellentesque scelerisque id a lorem. Sed
+            nisl ex, semper eu volutpat vitae, elementum in orci. Nulla
+            facilisi. Vivamus dapibus consectetur ligula sed semper. Donec
+            tincidunt venenatis tortor, eget elementum enim tincidunt dignissim.
+            Pellentesque iaculis metus id nisl facilisis, sodales posuere augue
+            tempus. Quisque eget ornare leo, et pretium orci.
+          </p>
+          <p>
+            Fusce quis tellus sed ligula dignissim euismod non sed risus. Nulla
+            varius volutpat quam non iaculis. Suspendisse ornare dolor ut ante
+            pharetra ultrices. Vestibulum ultricies commodo sagittis. Phasellus
+            ac porttitor ex. Curabitur tempor fermentum metus. Etiam id rutrum
+            justo, vel consectetur quam.
+          </p>
+          <p>
+            Phasellus ut vestibulum magna, ac faucibus nunc. Aenean porttitor
+            feugiat luctus. Vestibulum tincidunt velit at erat aliquam
+            consequat. Nunc finibus tortor eros, eget varius turpis porta ac.
+            Aliquam accumsan aliquam blandit. Etiam sed tellus at erat dignissim
+            convallis at id diam. Donec varius, lorem at tincidunt aliquam,
+            sapien ante ornare nibh, quis pulvinar dui massa id orci. In blandit
+            accumsan erat non dictum. Donec consequat, urna nec sollicitudin
+            cursus, ante lacus posuere erat, ac tristique ante nunc non justo.
+            Vestibulum ac accumsan nunc. Aenean et tellus nibh. Curabitur
+            aliquam sollicitudin elit, bibendum varius velit facilisis in.
+          </p>
+        </div>
+        <div id="end-note"></div>
+        <div id="bottom-nav-buttons">
+          <a id="bottom-prev-button">Previous Chapter</a>
+          <a id="bottom-next-button">Next Chapter</a>
+        </div>
+        <div id="dates">
+          <span id="created-date"></span>
+          <span id="edited-date"></span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
