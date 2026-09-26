@@ -48,7 +48,6 @@ async function embedImagesAsBase64(html) {
   await Promise.all(
     Array.from(image_elements, async (image_element) => {
       const image_url = image_element.getAttribute("src");
-      console.log(image_url);
       if (image_url === null || image_url.startsWith("data:")) {
         return;
       }
@@ -64,7 +63,23 @@ async function embedImagesAsBase64(html) {
       }
 
       image_element.setAttribute("src", `data:${image.type};base64,${base64}`);
-      console.log(base64);
+    }),
+  );
+
+  return html;
+}
+
+/**
+ * Cleans up unnecessary html elements and attributes.
+ * @param {HTMLHtmlElement} html
+ * @returns {Promise<HTMLHtmlElement>}
+ */
+async function cleanHtml(html) {
+  const p_elements = html.querySelectorAll("p");
+
+  await Promise.all(
+    Array.from(p_elements, async (p_element) => {
+      p_element.removeAttribute("class");
     }),
   );
 

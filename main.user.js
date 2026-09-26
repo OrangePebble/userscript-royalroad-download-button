@@ -125,9 +125,15 @@ let chapter_list;
           let chapter_content = await getChapterContent(
             chosen_chapters_list[i].url,
           );
-          chapter_content.chapter_html = await embedImagesAsBase64(
-            chapter_content.chapter_html,
-          );
+          let chapter_html = chapter_content.chapter_html;
+          let start_note_html = chapter_content.start_note_html;
+          let end_note_html = chapter_content.end_note_html;
+          chapter_html = await cleanHtml(chapter_html);
+          start_note_html = await cleanHtml(start_note_html);
+          end_note_html = await cleanHtml(end_note_html);
+          chapter_html = await embedImagesAsBase64(chapter_html);
+          start_note_html = await embedImagesAsBase64(start_note_html);
+          end_note_html = await embedImagesAsBase64(end_note_html);
           console.log(
             chapter_content.chapter_html,
             chapter_content.start_note_html,
