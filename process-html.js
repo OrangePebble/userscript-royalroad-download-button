@@ -2,25 +2,32 @@
  * @param {string} image_url
  * @returns {Promise<Blob | void>}
  */
-async function _fetchImage(image_url) {
-  const image = await fetch(image_url, {
-    credentials: "omit",
-  })
-    .then((response) => response.blob())
-    .catch((error) => {
-      // If this fails, other images can still be downloaded, so we check outside this function.
-      console.error(error);
-      return;
+async function fetchImage(image_url) {
+  try {
+    // Not using fetch() because it is subject to the page's CORS policy and
+    //  because images may require being redirected.
+    const request = await GM.xmlHttpRequest({
+      url: image_url,
+      responseType: "blob",
+      anonymous: true,
     });
+    if (request.status < 200 || request.status >= 400) {
+      throw new Error(`Failed to fetch image (HTTP ${request.status})`);
+    }
 
-  return image;
+    return request.response;
+  } catch (error) {
+    // If this fails, other images can still be downloaded, so we check outside this function.
+    console.error(error);
+    return;
+  }
 }
 
 /**
  * @param {Blob} image
  * @returns {Promise<string | void>}
  */
-async function _imageBlobToBase64(image) {
+async function imageBlobToBase64(image) {
   return await new Promise((resolve) => {
     const reader = new FileReader();
 
@@ -52,12 +59,12 @@ async function embedImagesAsBase64(html) {
         return;
       }
 
-      const image = await _fetchImage(new URL(image_url, html.baseURI).href);
+      const image = await fetchImage(new URL(image_url, html.baseURI).href);
       if (image === undefined) {
         return;
       }
 
-      const base64 = await _imageBlobToBase64(image);
+      const base64 = await imageBlobToBase64(image);
       if (base64 === undefined) {
         return;
       }
@@ -70,16 +77,26 @@ async function embedImagesAsBase64(html) {
 }
 
 /**
- * Cleans up unnecessary html elements and attributes.
+ * Cleans up and processes chapter html.
  * @param {HTMLHtmlElement} html
  * @returns {Promise<HTMLHtmlElement>}
  */
-async function cleanHtml(html) {
+async function processHtml(html) {
   const p_elements = html.querySelectorAll("p");
-
   await Promise.all(
     Array.from(p_elements, async (p_element) => {
       p_element.removeAttribute("class");
+    }),
+  );
+
+  const img_elements = html.querySelectorAll("img");
+  await Promise.all(
+    Array.from(img_elements, async (img_element) => {
+      img_element.setAttribute(
+        "onerror",
+        // TODO: figure out what alternative image to use. maybe a "transparent" grid image. do svgs work here?
+        `this.onerror=null; this.src=''`,
+      );
     }),
   );
 

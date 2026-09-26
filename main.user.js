@@ -10,7 +10,6 @@
 // The following @require is needed for jszip to work with @grant
 // @require     data:application/javascript,window.setImmediate%20%3D%20window.setImmediate%20%7C%7C%20((f%2C%20...args)%20%3D%3E%20window.setTimeout(()%20%3D%3E%20f(args)%2C%200))%3B
 // @require     https://cdn.jsdelivr.net/npm/jszip@3.10.1
-// @require     https://cdn.jsdelivr.net/npm/file-saver@2.0.5
 // @require     https://update.greasyfork.org/scripts/498119/1399005/setupCommands.js
 // @run-at      document-end
 // @grant       GM.registerMenuCommand
@@ -18,6 +17,7 @@
 // @grant       GM.getValue
 // @grant       GM.setValue
 // @grant       GM.getResourceText
+// @grant       GM.xmlHttpRequest
 // @resource    FICTION_BUTTON_HTML http://localhost:3000/fiction-button
 // @require     http://localhost:3000/add-fiction-button.js
 // @require     http://localhost:3000/get-chapter-list.js
@@ -29,6 +29,8 @@
 // TODO:
 // - Update metadata above.
 // - Figure out what would be the best way to allow the user to customize the downloaded file name.
+// - Decide if I should have an option to only update metadata and not add chapters to existing file.
+// - Decide if I should have an option to remove img elements if I couldn't fetch them.
 
 // INFO: In order to run local files I can use a simple webserver to serve all the files in this folder.
 // I can't use "file://" because it is blocked either by Firefox or Violentmonkey.
@@ -61,6 +63,8 @@
 // - Extend existing file (if download format is single EPUB or HTML):
 //   - Input to upload existing file
 // - Update theme and font (if existing file is being extended and is HTML): true or false
+// - Update metadata: true or false
+//   - Title, author name, tags, cover
 // - Start and end chapter selection.
 
 const FICTION_REGEX = new RegExp(
@@ -102,13 +106,6 @@ let chapter_list;
         "orangepebble-confirm-download-button",
       );
       confirm.addEventListener("click", async () => {
-        // TODO: For each chapter between the start select and end select, get:
-        //  - Chapter HTML content
-        //  - Start note HTML content
-        //  - End note HTML content
-        // TODO: Take each HTML and convert the image links into embedded base64 images
-        // TODO: Make changes to each HTML common to all download formats
-        // TODO: Make changes to each HTML for the chosen download format
         let start_chapter_select = document.getElementById(
           "orangepebble-start-chapter-select",
         );
@@ -121,6 +118,13 @@ let chapter_list;
           start_index,
           end_index + 1,
         );
+
+        const title = document.getElementsByTagName("h1")[0].innerText;
+        const author = document.querySelector("#chapterHeroData h4").innerText;
+        const cover_url = document.querySelector(
+          ".cover-art-container > img",
+        ).src;
+
         for (let i = 0; i < chosen_chapters_list.length; i++) {
           let chapter_content = await getChapterContent(
             chosen_chapters_list[i].url,
@@ -128,9 +132,9 @@ let chapter_list;
           let chapter_html = chapter_content.chapter_html;
           let start_note_html = chapter_content.start_note_html;
           let end_note_html = chapter_content.end_note_html;
-          chapter_html = await cleanHtml(chapter_html);
-          start_note_html = await cleanHtml(start_note_html);
-          end_note_html = await cleanHtml(end_note_html);
+          chapter_html = await processHtml(chapter_html);
+          start_note_html = await processHtml(start_note_html);
+          end_note_html = await processHtml(end_note_html);
           chapter_html = await embedImagesAsBase64(chapter_html);
           start_note_html = await embedImagesAsBase64(start_note_html);
           end_note_html = await embedImagesAsBase64(end_note_html);
