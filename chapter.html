@@ -30,6 +30,7 @@
         --color-surface-alt: #131313;
         --radius-md: 0.375rem;
         --color-on-surface-muted: oklch(55.6% 0 0);
+        --font-weight-bold: 700;
       }
       body {
         background: var(--color-surface);
@@ -124,6 +125,29 @@
         border-style: solid;
         border-radius: var(--radius-md);
         color: var(--color-on-surface);
+        display: flex;
+        flex-direction: column;
+        gap: calc(var(--spacing) * 4);
+      }
+      p {
+        font-size: 15px;
+        margin-bottom: 1em;
+        margin-top: 0;
+      }
+      #start-note,
+      #end-note {
+        padding: calc(var(--spacing) * 4);
+        background-color: color-mix(
+          in oklab,
+          var(--color-primary) 30%,
+          transparent
+        );
+        border-radius: var(--radius-sm);
+      }
+      #start-note::before,
+      #end-note::before {
+        content: "🗈 A NOTE FROM THE AUTHOR";
+        font-weight: var(--font-weight-bold);
       }
       #top-nav-buttons,
       #bottom-nav-buttons {
@@ -264,6 +288,7 @@
         display: flex;
         justify-content: flex-end;
         flex-wrap: wrap;
+        margin-top: calc(var(--spacing) * -4);
       }
       time {
         color: var(--color-on-surface-muted);
@@ -377,7 +402,62 @@
           <a id="top-prev-button" href="https://example.com"></a>
           <a id="top-next-button"></a>
         </div>
-        <div id="start-note"></div>
+        <div id="start-note">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut justo
+            augue, molestie in rhoncus tristique, rhoncus id eros. Cras
+            fringilla mauris sit amet tortor tincidunt posuere. Nunc et ligula
+            id nisl pellentesque convallis. Vestibulum egestas lorem iaculis,
+            commodo est eu, rhoncus lectus. Aliquam vitae ultrices mi. Etiam
+            sagittis ultrices augue non hendrerit. Vivamus at venenatis elit.
+            Nulla gravida tellus et felis porttitor eleifend. Nulla facilisi.
+            Aliquam convallis pharetra odio, nec fermentum diam dictum eu. Ut
+            augue sapien, semper eget aliquam nec, congue maximus ipsum. Vivamus
+            sodales bibendum odio, eu dignissim nibh egestas at. Donec commodo
+            congue lorem eu accumsan. Etiam aliquet risus vel malesuada
+            suscipit.
+          </p>
+          <p>
+            Mauris in sem eget ex semper porta non ut est. Vivamus hendrerit
+            sapien id nunc venenatis posuere. Integer id lacus ut nulla sodales
+            mattis eget nec leo. Nam varius orci dapibus placerat semper. Nulla
+            id augue ut arcu varius vestibulum a mollis lorem. Phasellus id
+            risus vel felis laoreet tempor tincidunt et elit. Curabitur placerat
+            felis a rhoncus convallis. Proin lacinia placerat ex, quis auctor
+            sapien. Nullam in rutrum elit. Nulla pharetra quis mauris eget
+            malesuada. Phasellus consectetur eget ipsum vel feugiat. Aliquam
+            mauris elit, interdum id porta eu, iaculis a dolor. Aenean efficitur
+            quis justo eu posuere. Mauris a urna eu libero efficitur molestie in
+            sed risus.
+          </p>
+          <p>
+            Morbi nec diam eget nulla pellentesque scelerisque id a lorem. Sed
+            nisl ex, semper eu volutpat vitae, elementum in orci. Nulla
+            facilisi. Vivamus dapibus consectetur ligula sed semper. Donec
+            tincidunt venenatis tortor, eget elementum enim tincidunt dignissim.
+            Pellentesque iaculis metus id nisl facilisis, sodales posuere augue
+            tempus. Quisque eget ornare leo, et pretium orci.
+          </p>
+          <p>
+            Fusce quis tellus sed ligula dignissim euismod non sed risus. Nulla
+            varius volutpat quam non iaculis. Suspendisse ornare dolor ut ante
+            pharetra ultrices. Vestibulum ultricies commodo sagittis. Phasellus
+            ac porttitor ex. Curabitur tempor fermentum metus. Etiam id rutrum
+            justo, vel consectetur quam.
+          </p>
+          <p>
+            Phasellus ut vestibulum magna, ac faucibus nunc. Aenean porttitor
+            feugiat luctus. Vestibulum tincidunt velit at erat aliquam
+            consequat. Nunc finibus tortor eros, eget varius turpis porta ac.
+            Aliquam accumsan aliquam blandit. Etiam sed tellus at erat dignissim
+            convallis at id diam. Donec varius, lorem at tincidunt aliquam,
+            sapien ante ornare nibh, quis pulvinar dui massa id orci. In blandit
+            accumsan erat non dictum. Donec consequat, urna nec sollicitudin
+            cursus, ante lacus posuere erat, ac tristique ante nunc non justo.
+            Vestibulum ac accumsan nunc. Aenean et tellus nibh. Curabitur
+            aliquam sollicitudin elit, bibendum varius velit facilisis in.
+          </p>
+        </div>
         <div id="chapter-content">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut justo
@@ -434,7 +514,62 @@
             aliquam sollicitudin elit, bibendum varius velit facilisis in.
           </p>
         </div>
-        <div id="end-note"></div>
+        <div id="end-note">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut justo
+            augue, molestie in rhoncus tristique, rhoncus id eros. Cras
+            fringilla mauris sit amet tortor tincidunt posuere. Nunc et ligula
+            id nisl pellentesque convallis. Vestibulum egestas lorem iaculis,
+            commodo est eu, rhoncus lectus. Aliquam vitae ultrices mi. Etiam
+            sagittis ultrices augue non hendrerit. Vivamus at venenatis elit.
+            Nulla gravida tellus et felis porttitor eleifend. Nulla facilisi.
+            Aliquam convallis pharetra odio, nec fermentum diam dictum eu. Ut
+            augue sapien, semper eget aliquam nec, congue maximus ipsum. Vivamus
+            sodales bibendum odio, eu dignissim nibh egestas at. Donec commodo
+            congue lorem eu accumsan. Etiam aliquet risus vel malesuada
+            suscipit.
+          </p>
+          <p>
+            Mauris in sem eget ex semper porta non ut est. Vivamus hendrerit
+            sapien id nunc venenatis posuere. Integer id lacus ut nulla sodales
+            mattis eget nec leo. Nam varius orci dapibus placerat semper. Nulla
+            id augue ut arcu varius vestibulum a mollis lorem. Phasellus id
+            risus vel felis laoreet tempor tincidunt et elit. Curabitur placerat
+            felis a rhoncus convallis. Proin lacinia placerat ex, quis auctor
+            sapien. Nullam in rutrum elit. Nulla pharetra quis mauris eget
+            malesuada. Phasellus consectetur eget ipsum vel feugiat. Aliquam
+            mauris elit, interdum id porta eu, iaculis a dolor. Aenean efficitur
+            quis justo eu posuere. Mauris a urna eu libero efficitur molestie in
+            sed risus.
+          </p>
+          <p>
+            Morbi nec diam eget nulla pellentesque scelerisque id a lorem. Sed
+            nisl ex, semper eu volutpat vitae, elementum in orci. Nulla
+            facilisi. Vivamus dapibus consectetur ligula sed semper. Donec
+            tincidunt venenatis tortor, eget elementum enim tincidunt dignissim.
+            Pellentesque iaculis metus id nisl facilisis, sodales posuere augue
+            tempus. Quisque eget ornare leo, et pretium orci.
+          </p>
+          <p>
+            Fusce quis tellus sed ligula dignissim euismod non sed risus. Nulla
+            varius volutpat quam non iaculis. Suspendisse ornare dolor ut ante
+            pharetra ultrices. Vestibulum ultricies commodo sagittis. Phasellus
+            ac porttitor ex. Curabitur tempor fermentum metus. Etiam id rutrum
+            justo, vel consectetur quam.
+          </p>
+          <p>
+            Phasellus ut vestibulum magna, ac faucibus nunc. Aenean porttitor
+            feugiat luctus. Vestibulum tincidunt velit at erat aliquam
+            consequat. Nunc finibus tortor eros, eget varius turpis porta ac.
+            Aliquam accumsan aliquam blandit. Etiam sed tellus at erat dignissim
+            convallis at id diam. Donec varius, lorem at tincidunt aliquam,
+            sapien ante ornare nibh, quis pulvinar dui massa id orci. In blandit
+            accumsan erat non dictum. Donec consequat, urna nec sollicitudin
+            cursus, ante lacus posuere erat, ac tristique ante nunc non justo.
+            Vestibulum ac accumsan nunc. Aenean et tellus nibh. Curabitur
+            aliquam sollicitudin elit, bibendum varius velit facilisis in.
+          </p>
+        </div>
         <div id="bottom-nav-buttons">
           <a id="bottom-prev-button"></a>
           <a id="bottom-next-button" href="https://example.com"></a>
