@@ -30,6 +30,7 @@
 // ==/UserScript==
 
 // TODO:
+// - Add shrink on click styling on chapter buttons.
 // - Update metadata above.
 // - Figure out what would be the best way to allow the user to customize the downloaded file name.
 // - Decide if I should have an option to only update metadata and not add chapters to existing file.
