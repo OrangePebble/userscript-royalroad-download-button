@@ -23,11 +23,6 @@ async function downloadMultiHtml(fiction_title, author, cover_url, chapters) {
       return `${number} - ${filenamePart(chapter.title) || "Chapter"}.html`;
     });
 
-    folder.file(
-      "index.html",
-      createIndexHtml(fiction_title, author, chapters, chapter_filenames),
-    );
-
     for (const [index, chapter] of chapters.entries()) {
       folder.file(
         chapter_filenames[index],
@@ -72,48 +67,20 @@ function filenamePart(value) {
 }
 
 /**
- * @param {string} value
- * @returns {string}
+ * @param {Document} document
+ * @param {string} selector
+ * @param {HTMLElement | null} content
  */
-function escapeHtml(value) {
-  const element = document.createElement("span");
-  element.textContent = value;
-  return element.innerHTML;
-}
-
-/**
- * @param {HTMLElement | null} element
- * @returns {string}
- */
-function elementHtml(element) {
-  return element === null ? "" : element.outerHTML;
+function insertChapterContent(document, selector, content) {
+  const element = document.querySelector(selector);
+  element.replaceChildren(...(content?.cloneNode(true).childNodes ?? []));
+  element.hidden = content === null;
 }
 
 /**
  * @param {string} fiction_title
  * @param {string} author
- * @param {{title: string}[]} chapters
- * @param {string[]} chapter_filenames
- * @returns {string}
- */
-function createIndexHtml(fiction_title, author, chapters, chapter_filenames) {
-  const chapter_links = chapters
-    .map(
-      (chapter, index) =>
-        `<li><a href="${encodeURIComponent(chapter_filenames[index])}">${escapeHtml(chapter.title)}</a></li>`,
-    )
-    .join("");
-
-  return createDocument(
-    fiction_title,
-    `<header><h1>${escapeHtml(fiction_title)}</h1><p>by ${escapeHtml(author)}</p></header><main><h2>Chapters</h2><ol>${chapter_links}</ol></main>`,
-  );
-}
-
-/**
- * @param {string} fiction_title
- * @param {string} author
- * @param {{title: string, chapter_html: HTMLElement, start_note_html: HTMLElement | null, end_note_html: HTMLElement | null}} chapter
+ * @param {{title: string, chapter_html: HTMLElement, start_note_html: HTMLElement | null, end_note_html: HTMLElement | null, created_date: string, edited_date: string}} chapter
  * @param {string | null} previous_filename
  * @param {string | null} next_filename
  * @returns {string}
@@ -125,50 +92,50 @@ function createChapterHtml(
   previous_filename,
   next_filename,
 ) {
-  const navigation = `<nav><span>${
-    previous_filename
-      ? `<a href="${encodeURIComponent(previous_filename)}">Previous</a>`
-      : "Previous"
-  }</span><a href="index.html">Index</a><span>${
-    next_filename
-      ? `<a href="${encodeURIComponent(next_filename)}">Next</a>`
-      : "Next"
-  }</span></nav>`;
-  const content = `${elementHtml(chapter.start_note_html)}${elementHtml(
-    chapter.chapter_html,
-  )}${elementHtml(chapter.end_note_html)}`;
-
-  return createDocument(
-    `${chapter.title} — ${fiction_title}`,
-    `<header><h1>${escapeHtml(chapter.title)}</h1><p>${escapeHtml(fiction_title)} by ${escapeHtml(author)}</p></header>${navigation}<main>${content}</main>${navigation}`,
+  const chapter_document = PARSER.parseFromString(
+    GM.getResourceText("CHAPTER_HTML"),
+    "text/html",
   );
-}
 
-/**
- * @param {string} title
- * @param {string} body
- * @returns {string}
- */
-function createDocument(title, body) {
-  return `<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${escapeHtml(title)}</title>
-<style>
-:root { color-scheme: dark; font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif; line-height: 1.55; }
-body { max-width: 970px; margin: 0 auto; padding: 1rem; background: #181818; color: hsla(0, 0%, 100%, .8); font-size: 16px; }
-header, main, nav { background: #131313; border: 1px solid hsla(0, 0%, 100%, .1); padding: 1rem 1.25rem; }
-header { margin-bottom: 1rem; } h1, h2 { color: #fff; } h1 { margin: 0; } header p { margin-bottom: 0; }
-main { margin: 1rem 0; } a { color: #58a6ff; } img { height: auto !important; max-width: 100%; }
-.author-note-portlet, .author-note-card { background: #393939; padding: .75rem 1rem; margin: 1rem 0; }
-nav { display: flex; justify-content: space-between; gap: 1rem; } nav span { color: #888; } nav span a { color: #58a6ff; }
-table { max-width: 100%; } pre { overflow-x: auto; white-space: pre-wrap; }
-</style>
-</head>
-<body>
-${body}
-</body>
-</html>`;
+  chapter_document.title = `${chapter.title} — ${fiction_title}`;
+  chapter_document.querySelector("#fiction-title h2").textContent =
+    fiction_title;
+  chapter_document.querySelector("#chapter-title h1").textContent =
+    chapter.title;
+  chapter_document.querySelector("#author h4").textContent = author;
+  insertChapterContent(
+    chapter_document,
+    "#start-note",
+    chapter.start_note_html,
+  );
+  insertChapterContent(
+    chapter_document,
+    "#chapter-content",
+    chapter.chapter_html,
+  );
+  insertChapterContent(chapter_document, "#end-note", chapter.end_note_html);
+
+  for (const button_selector of ["#top-prev-button", "#bottom-prev-button"]) {
+    const button = chapter_document.querySelector(button_selector);
+    if (previous_filename !== null) {
+      button.href = encodeURIComponent(previous_filename);
+    }
+  }
+  for (const button_selector of ["#top-next-button", "#bottom-next-button"]) {
+    const button = chapter_document.querySelector(button_selector);
+    if (next_filename !== null) {
+      button.href = encodeURIComponent(next_filename);
+    }
+  }
+
+  for (const [selector, date] of [
+    ["#created-date", chapter.created_date],
+    ["#edited-date", chapter.edited_date],
+  ]) {
+    const element = chapter_document.querySelector(selector);
+    element.dateTime = date;
+    element.textContent = new Date(date).toLocaleString();
+  }
+
+  return `<!doctype html>\n${chapter_document.documentElement.outerHTML}`;
 }

@@ -48,6 +48,7 @@
 
 // NOTE:
 // Decisions:
+// - This userscript will not support the legacy UI, I don't see a point and it would just be additional work.
 // - As both the fiction and chapter buttons now require a popup for the "extend with new chapters" input,
 //   there is no point in having the options in the Violentmonkey extension. So all options will now stay
 //   in the popup.
@@ -88,7 +89,6 @@ const CHAPTER_REGEX = new RegExp(
 const CORRUPTED_CHAPTER_REGEX = new RegExp(
   /^https:\/\/www.royalroad.com\/fiction\/chapter\/(\d+)\/?[^\/]*$/,
 );
-const IS_LEGACY_UI = document.getElementById("beta-switcher") !== null;
 
 const PARSER = new DOMParser();
 
@@ -98,78 +98,80 @@ const PARSER = new DOMParser();
 let chapter_list;
 
 (async () => {
-  if (!IS_LEGACY_UI) {
-    if (FICTION_REGEX.test(window.location.href)) {
-      addFictionButton();
+  const IS_LEGACY_UI = document.getElementById("beta-switcher") !== null;
+  if (IS_LEGACY_UI) {
+    return;
+  }
+  if (FICTION_REGEX.test(window.location.href)) {
+    addFictionButton();
 
-      let firstClick = true;
-      let toggle = document.getElementById("orangepebble-form-toggle");
-      toggle.addEventListener("click", async () => {
-        if (firstClick) {
-          firstClick = false;
-          chapter_list = await getChapterList();
-          fillChapterSelects(chapter_list);
-        }
-      });
+    let firstClick = true;
+    let toggle = document.getElementById("orangepebble-form-toggle");
+    toggle.addEventListener("click", async () => {
+      if (firstClick) {
+        firstClick = false;
+        chapter_list = await getChapterList();
+        fillChapterSelects(chapter_list);
+      }
+    });
 
-      let confirm = document.getElementById(
-        "orangepebble-confirm-download-button",
+    let confirm = document.getElementById(
+      "orangepebble-confirm-download-button",
+    );
+    confirm.addEventListener("click", async () => {
+      let start_chapter_select = document.getElementById(
+        "orangepebble-start-chapter-select",
       );
-      confirm.addEventListener("click", async () => {
-        let start_chapter_select = document.getElementById(
-          "orangepebble-start-chapter-select",
-        );
-        let end_chapter_select = document.getElementById(
-          "orangepebble-end-chapter-select",
-        );
-        const start_index = Number(start_chapter_select.value);
-        const end_index = Number(end_chapter_select.value);
-        const chosen_chapters_list = chapter_list.slice(
-          start_index,
-          end_index + 1,
-        );
+      let end_chapter_select = document.getElementById(
+        "orangepebble-end-chapter-select",
+      );
+      const start_index = Number(start_chapter_select.value);
+      const end_index = Number(end_chapter_select.value);
+      const chosen_chapters_list = chapter_list.slice(
+        start_index,
+        end_index + 1,
+      );
 
-        const fiction_title = document.getElementsByTagName("h1")[0].innerText;
-        const author = document.querySelector("#chapterHeroData h4").innerText;
-        const cover_url = document.querySelector(
-          ".cover-art-container > img",
-        ).src;
+      const fiction_title = document.getElementsByTagName("h1")[0].innerText;
+      const author = document.querySelector("#chapterHeroData h4").innerText;
+      const cover_url = document.querySelector(
+        ".cover-art-container > img",
+      ).src;
 
-        /**
-         * @type {{title: string, url: string, chapter_html: HTMLElement, start_note_html: HTMLElement | null, end_note_html: HTMLElement | null, created_date: string, edited_date: string}[]}
-         */
-        let processed_chapters = [];
-        for (let i = 0; i < chosen_chapters_list.length; i++) {
-          let chapter_content = await getChapterContent(
-            chosen_chapters_list[i].url,
-          );
-          let chapter_html = chapter_content.chapter_html;
-          let start_note_html = chapter_content.start_note_html;
-          let end_note_html = chapter_content.end_note_html;
-          let created_date = chapter_content.created_date;
-          let edited_date = chapter_content.edited_date;
-          chapter_html = await processHtml(chapter_html);
-          chapter_html = await embedImagesAsBase64(chapter_html);
-          if (start_note_html !== null) {
-            start_note_html = await processHtml(start_note_html);
-            start_note_html = await embedImagesAsBase64(start_note_html);
-          }
-          if (end_note_html !== null) {
-            end_note_html = await processHtml(end_note_html);
-            end_note_html = await embedImagesAsBase64(end_note_html);
-          }
-          processed_chapters.push({
-            title: chosen_chapters_list[i].title,
-            url: chosen_chapters_list[i].url,
-            chapter_html,
-            start_note_html,
-            end_note_html,
-            created_date,
-            edited_date,
-          });
+      /**
+       * @type {{title: string, url: string, chapter_html: HTMLElement, start_note_html: HTMLElement | null, end_note_html: HTMLElement | null, created_date: string, edited_date: string}[]}
+       */
+      let processed_chapters = [];
+      for (let i = 0; i < chosen_chapters_list.length; i++) {
+        let chapter_content = await getChapterContent(
+          chosen_chapters_list[i].url,
+        );
+        let chapter_html = chapter_content.chapter_html;
+        let start_note_html = chapter_content.start_note_html;
+        let end_note_html = chapter_content.end_note_html;
+        let created_date = chapter_content.created_date;
+        let edited_date = chapter_content.edited_date;
+        chapter_html = await processHtml(chapter_html);
+        chapter_html = await embedImagesAsBase64(chapter_html);
+        if (start_note_html !== null) {
+          start_note_html = await processHtml(start_note_html);
+          start_note_html = await embedImagesAsBase64(start_note_html);
         }
-        downloadMultiHtml(fiction_title, author, cover_url, processed_chapters);
-      });
-    }
+        if (end_note_html !== null) {
+          end_note_html = await processHtml(end_note_html);
+          end_note_html = await embedImagesAsBase64(end_note_html);
+        }
+        processed_chapters.push({
+          title: chosen_chapters_list[i].title,
+          url: chosen_chapters_list[i].url,
+          chapter_html,
+          start_note_html,
+          end_note_html,
+          created_date,
+          edited_date,
+        });
+      }
+      downloadMultiHtml(fiction_title, author, cover_url, processed_chapters);
+    });
   }
 })();
