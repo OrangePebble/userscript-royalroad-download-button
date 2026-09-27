@@ -31,6 +31,7 @@
         --radius-md: 0.375rem;
         --color-on-surface-muted: oklch(55.6% 0 0);
         --font-weight-bold: 700;
+        --color-table: #00436f;
       }
       body {
         background: var(--color-surface);
@@ -133,6 +134,27 @@
         font-size: 15px;
         margin-bottom: 1em;
         margin-top: 0;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        vertical-align: middle;
+      }
+      table {
+        background: var(--color-table);
+        margin: 10px auto;
+        width: 90%;
+        border: none;
+        box-shadow: 1px 1px 1px #000000bf;
+        border-collapse: separate;
+        border-spacing: 2px;
+        text-indent: 0;
+      }
+      td {
+        padding: 5px;
+        color: var(--color-on-primary);
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        background: #0000001a;
       }
       #start-note,
       #end-note {
@@ -403,59 +425,31 @@
           <a id="top-next-button"></a>
         </div>
         <div id="start-note">
+          <p>&nbsp;</p>
+          <p><em>Synopsis:</em></p>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut justo
-            augue, molestie in rhoncus tristique, rhoncus id eros. Cras
-            fringilla mauris sit amet tortor tincidunt posuere. Nunc et ligula
-            id nisl pellentesque convallis. Vestibulum egestas lorem iaculis,
-            commodo est eu, rhoncus lectus. Aliquam vitae ultrices mi. Etiam
-            sagittis ultrices augue non hendrerit. Vivamus at venenatis elit.
-            Nulla gravida tellus et felis porttitor eleifend. Nulla facilisi.
-            Aliquam convallis pharetra odio, nec fermentum diam dictum eu. Ut
-            augue sapien, semper eget aliquam nec, congue maximus ipsum. Vivamus
-            sodales bibendum odio, eu dignissim nibh egestas at. Donec commodo
-            congue lorem eu accumsan. Etiam aliquet risus vel malesuada
-            suscipit.
+            <span style="font-weight: 400"
+              >The life of a Soviet bio-weapons designer Vladislav Kerenski ends
+              with a bang</span
+            ><span style="font-weight: 400"
+              >—only to reboot in a realm of gods and monsters.
+            </span>
           </p>
           <p>
-            Mauris in sem eget ex semper porta non ut est. Vivamus hendrerit
-            sapien id nunc venenatis posuere. Integer id lacus ut nulla sodales
-            mattis eget nec leo. Nam varius orci dapibus placerat semper. Nulla
-            id augue ut arcu varius vestibulum a mollis lorem. Phasellus id
-            risus vel felis laoreet tempor tincidunt et elit. Curabitur placerat
-            felis a rhoncus convallis. Proin lacinia placerat ex, quis auctor
-            sapien. Nullam in rutrum elit. Nulla pharetra quis mauris eget
-            malesuada. Phasellus consectetur eget ipsum vel feugiat. Aliquam
-            mauris elit, interdum id porta eu, iaculis a dolor. Aenean efficitur
-            quis justo eu posuere. Mauris a urna eu libero efficitur molestie in
-            sed risus.
+            <span style="font-weight: 400"
+              >Using his knowledge of the scientific method, computational
+              mathematics, biochemistry and virology Vladislav begins to unravel
+              the nature of magic to understand the principles of the life and
+              death-altering litrpg System of the world he's been reincarnated
+              on.</span
+            >
           </p>
           <p>
-            Morbi nec diam eget nulla pellentesque scelerisque id a lorem. Sed
-            nisl ex, semper eu volutpat vitae, elementum in orci. Nulla
-            facilisi. Vivamus dapibus consectetur ligula sed semper. Donec
-            tincidunt venenatis tortor, eget elementum enim tincidunt dignissim.
-            Pellentesque iaculis metus id nisl facilisis, sodales posuere augue
-            tempus. Quisque eget ornare leo, et pretium orci.
-          </p>
-          <p>
-            Fusce quis tellus sed ligula dignissim euismod non sed risus. Nulla
-            varius volutpat quam non iaculis. Suspendisse ornare dolor ut ante
-            pharetra ultrices. Vestibulum ultricies commodo sagittis. Phasellus
-            ac porttitor ex. Curabitur tempor fermentum metus. Etiam id rutrum
-            justo, vel consectetur quam.
-          </p>
-          <p>
-            Phasellus ut vestibulum magna, ac faucibus nunc. Aenean porttitor
-            feugiat luctus. Vestibulum tincidunt velit at erat aliquam
-            consequat. Nunc finibus tortor eros, eget varius turpis porta ac.
-            Aliquam accumsan aliquam blandit. Etiam sed tellus at erat dignissim
-            convallis at id diam. Donec varius, lorem at tincidunt aliquam,
-            sapien ante ornare nibh, quis pulvinar dui massa id orci. In blandit
-            accumsan erat non dictum. Donec consequat, urna nec sollicitudin
-            cursus, ante lacus posuere erat, ac tristique ante nunc non justo.
-            Vestibulum ac accumsan nunc. Aenean et tellus nibh. Curabitur
-            aliquam sollicitudin elit, bibendum varius velit facilisis in.
+            <span style="font-weight: 400"
+              >A rational, progression litrpg with giant monsters, wholesome
+              moments, lots of art and <strong>vast </strong>multitudes of
+              historical references.</span
+            >
           </p>
         </div>
         <div id="chapter-content">
@@ -473,6 +467,7 @@
             congue lorem eu accumsan. Etiam aliquet risus vel malesuada
             suscipit.
           </p>
+          <hr />
           <p>
             Mauris in sem eget ex semper porta non ut est. Vivamus hendrerit
             sapien id nunc venenatis posuere. Integer id lacus ut nulla sodales
@@ -485,6 +480,484 @@
             mauris elit, interdum id porta eu, iaculis a dolor. Aenean efficitur
             quis justo eu posuere. Mauris a urna eu libero efficitur molestie in
             sed risus.
+          </p>
+          <div style="overflow: auto">
+            <div style="max-width: 100%; overflow: auto">
+              <table>
+                <tbody>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnM2ZTA0MzMwYmMyMTQxMDM5NTFiNTJiOWNkMGYxNzdj"
+                        data-original-margin=""
+                      >
+                        Name:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnMwOTJlMDM2NDI4MzQ4MmE4ZjRhMmMxNWIyMTAxZTZl"
+                        data-original-margin=""
+                      >
+                        [Evaluation error]
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnNmOTdjZTRmMWM2YTRkODZhMmMzZTY3YTQzMDQ2YWNj"
+                        data-original-margin=""
+                      >
+                        Age:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnM5NWFlNjYxMDU4YTQ3Y2FhNTZjYTQwMzA1ZDA4ZjBj"
+                        data-original-margin=""
+                      >
+                        [Computational error]
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnM5OTM1Y2E4ZDRmNDRhMDg5Y2U3ZTg1MjEzYmQ2ZTE2"
+                        style="text-align: left"
+                        data-original-margin=""
+                      >
+                        Species &amp; Subtype:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnM1NmYwYTdkOGEwMjQ5ZDk4ZmExM2VmZjlmZDBiOTA2"
+                        style="text-align: left"
+                        data-original-margin=""
+                      >
+                        Untethered Soul [+1 agility/dexterity]
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnNjYTEzMWE3NDkzMjRkZmNhODYxZmQ5ODFlMWQ1YjM4"
+                        data-original-margin=""
+                      >
+                        Affinity:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnM1OWViOGQxZWJhMDQ3NzU4YzY4YTI4NTZiNjI0Yjc3"
+                        data-original-margin=""
+                      >
+                        Astral Phantom [Various stat bonuses from subsumed
+                        soul-shards and affiliated affliction]
+                      </p>
+                      <p
+                        class="cnMyN2U2YThhNWUxMjRlZGNhZmM0YTdkOWViYjQ4NTMy"
+                        data-original-margin=""
+                      >
+                        Spark of the Morningstar [+ 3 skill channels] [+ Soul
+                        Song skill]
+                      </p>
+                      <p
+                        class="cnM2Y2EyZmNmYzBmMDQyZTRhNTY5NDU0MTE2NzQ5ZGI4"
+                        data-original-margin=""
+                      >
+                        Dryad [+Chrysalis skill]
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnM3NWM0MjA3Y2ZmNzQzNzU5MWZhMjBkYmI2M2MyZDc4"
+                        data-original-margin=""
+                      >
+                        Level:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnNmZWQ5NjI0OTRhYTQyMGZiYzk0YTA0ZDk3ZWM4MmQx"
+                        data-original-margin=""
+                      >
+                        0
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%"></td>
+                    <td style="width: 67.2381%"></td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnNlNzU4MTdlMjFmODRiMmI5ZTNlMzBiNWViNjYyNWQ2"
+                        data-original-margin=""
+                      >
+                        Experience:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnMwYWY4NGU0OTBiYTRkZjg5MDc2OThiNmVhOTBhNDJm"
+                        data-original-margin=""
+                      >
+                        0/50
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%"></td>
+                    <td style="width: 67.2381%"></td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnNiYjAzMjM1MzQ2YzRiZjA5ZDlkMTAwNjMxNjgyY2Q5"
+                        data-original-margin=""
+                      >
+                        Health:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnM5NjZkNGJmZDU1ODQ2MTdhMDk1Mzc1MzA1NzY4MDIy"
+                        data-original-margin=""
+                      >
+                        0.1/0.1
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnM0NmE0MjZiZDU1ZTQ5NDY5NDQwZTQxMGE2YWU0OWFl"
+                        data-original-margin=""
+                      >
+                        Stamina:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnNjNmZkODgwYmVkNTQ0YmE5MTkzNjZkMjJhMGJmOGNh"
+                        data-original-margin=""
+                      >
+                        0.1/0.1
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnM2ZWE5Mzk0YmRhYzRlYjg5YTg0YTNhMmNiYWY5ZWRi"
+                        data-original-margin=""
+                      >
+                        Mana:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnMwYjYwZjIxOWFiYjRmYmQ4NjgxYjMyOTc3YzdhMmEx"
+                        data-original-margin=""
+                      >
+                        0.1/0.1
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnNlMTZlZDBjNzNiZDQyMDU5YmJlNDNhMmQ2ZTUwYTlk"
+                        data-original-margin=""
+                      >
+                        Mana regen:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnMzNWI1Mzg0ODVlZjQ3M2ViMDc1ZWZhYzQ3MDc2MjI2"
+                        data-original-margin=""
+                      >
+                        0.1m/hr
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%"></td>
+                    <td style="width: 67.2381%"></td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnM2MThhNmU1NGNlYjQ1NWU5MmRkNGY5OTRiZTI2YzE0"
+                        data-original-margin=""
+                      >
+                        Strength:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnM5MzBhMjkzZDE5YzQ3M2I5OGM0NjEyMGE3NGM2NDY5"
+                        data-original-margin=""
+                      >
+                        0
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnMwZDc3OGIzMmE0MzQ1ZDZhMGI2YjZlYmI1MjBjZjdk"
+                        data-original-margin=""
+                      >
+                        Agility:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnM0MmExYzA3ZjhmMDQzZDE5MmIyOWZiMzhhNDJiZDUy"
+                        data-original-margin=""
+                      >
+                        0 [+1]
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnNiYzQyOTVkNTRiMTRlNDI4YzQ4M2RkNzg2MzM1ODg3"
+                        data-original-margin=""
+                      >
+                        Dexterity:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnMyMjU2Zjg5NTM1ODQ5OGE5ZWJhYjAzZDcwODNmMmY3"
+                        data-original-margin=""
+                      >
+                        0 [+1]
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnNkOGI5YmRkYzcwYTQ2YjRhZDIxNTEyNzFmYmRhZmQ3"
+                        data-original-margin=""
+                      >
+                        Vitality:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnNlZjg1NjQ1ZmMxYjQ5NGNhNTBiNTY1MzhmZDRiNDM3"
+                        data-original-margin=""
+                      >
+                        0 [+2]
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnNjZWZiYjg0NDgyNTRjMTZhZmNhOTAzNDdmOWUyNzMw"
+                        data-original-margin=""
+                      >
+                        Charisma:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnNiOTIyMDk1NTAwMDQ2MWQ5MzkxNjY3NzRhM2Q5OWVh"
+                        data-original-margin=""
+                      >
+                        0
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnMwOWNkZjM1MjQ1NDRmMzBhZDg4NDRhMjEyYjhjMGU5"
+                        data-original-margin=""
+                      >
+                        Magic:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnMxNmNlODRjODRkZDQyZWZhNTliNzA2ZTJkMzZhMDIw"
+                        data-original-margin=""
+                      >
+                        0 [+2]
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnNkMTZkYmExNTc5MDRiZGY5YTMzMWE3YTBkNWFjYjFm"
+                        data-original-margin=""
+                      >
+                        Foresight:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnM4ZTQ1YTAzN2UyYjQzZDJhYWIwYmU4ZGRiOTFiZGY5"
+                        data-original-margin=""
+                      >
+                        0
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnNkZTIyNjliNzJiMjQxZGZiMDA3ODE4MzYyYjI0ODM5"
+                        data-original-margin=""
+                      >
+                        Intelligence:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnNiZWQwZDBjMjYzODQzNDA4YjM1ZmZiMjBlMDY0MTg3"
+                        data-original-margin=""
+                      >
+                        0 [+2]
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnMxYTk1ZWU1MzhhZTQ4MTZiNTMxM2E5ZTMxNDU3YzRh"
+                        data-original-margin=""
+                      >
+                        Wisdom:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnNiMzQwY2Y3MGVkMTQ0YmNhMzZhMTQ0MjEwMDM2MjZk"
+                        data-original-margin=""
+                      >
+                        0 [+2]
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnM0NzgzZDdkOWIyODRjMTM5M2JjZmEwYjc2Y2Y3ZWQw"
+                        data-original-margin=""
+                      >
+                        Soul:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnM4OTk4YTJiYjRkMjRmMGU4Y2ZlZmE4NWI0ZDM4M2Q4"
+                        data-original-margin=""
+                      >
+                        1 [+2] [-2]
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%"></td>
+                    <td style="width: 67.2381%"></td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnNiZDFkNDhlMWExMjRmN2Q5ODBmMjliZjVhMzNiNjkw"
+                        data-original-margin=""
+                      >
+                        Skills:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnM1Yzg4YjE0ODVlYzRlY2VhY2I4NDdiNWZjYjM5MDQ5"
+                        data-original-margin=""
+                      >
+                        [Soul Song LV 0]
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnNjOGFlNTVmYzRkMzQ0MDFiYWI5YzE5YmU0ZDk1ODQ5"
+                        data-original-margin=""
+                      >
+                        &nbsp;
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnMwYWVlYTQ4ZjBhMDQwMzJhNTQxOWU3MjY0ZDczM2I3"
+                        data-original-margin=""
+                      >
+                        [Chrysalis LV 0]
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnMxYjRlOGNkYzE5YjQ3OTZhOWUzNTczYWNjYTQxNGVi"
+                        data-original-margin=""
+                      >
+                        &nbsp;
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnNlOTk1ZjJmZjcwYzQzY2FhN2Q3MzNlMGIyMGE5OWUy"
+                        data-original-margin=""
+                      >
+                        -
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 26.1894%">
+                      <p
+                        class="cnM5YzllZWRlYWM2NjQ5YTNiYTQzZWNiMGFlNmFiMzc1"
+                        data-original-margin=""
+                      >
+                        Affliction:
+                      </p>
+                    </td>
+                    <td style="width: 67.2381%">
+                      <p
+                        class="cnMxNTFiZGUwNDVhZjQ0N2U5MWFhOGIzZTQxNzEyZmM0"
+                        data-original-margin=""
+                      >
+                        [Soul decay: - 2]
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p>
+            <img
+              src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5ab0b6ce-f97e-4834-b089-8a0d050ab762/dh19296-f6a59388-1706-44bd-ac97-9e1cba04d89c.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzVhYjBiNmNlLWY5N2UtNDgzNC1iMDg5LThhMGQwNTBhYjc2MlwvZGgxOTI5Ni1mNmE1OTM4OC0xNzA2LTQ0YmQtYWM5Ny05ZTFjYmEwNGQ4OWMuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ehelI_79WNgApTcWSqd8ER8Cbu2Wb1W7TTqwJ1R3gJA"
+              alt="image"
+            />
           </p>
           <p>
             Morbi nec diam eget nulla pellentesque scelerisque id a lorem. Sed
