@@ -27,6 +27,8 @@
         --color-on-secondary: #fffc;
         --tracking-wide: 0.025em;
         --text-base--line-height: calc(1.5/1);
+        --color-surface-alt: #131313;
+        --radius-md: 0.375rem;
       }
       body {
         background: var(--color-surface);
@@ -107,14 +109,46 @@
         }
       }
       #body {
-        padding-block: calc(var(--padding) * 6);
-        padding-inline: calc(var(--padding) * 2);
+        margin-block: calc(var(--padding) * 6);
+        margin-inline: calc(var(--padding) * 2);
+        padding-block: calc(var(--spacing) * 4);
+        padding-inline: calc(var(--spacing) * 3);
+        background-color: var(--color-surface-alt);
+        border-color: color-mix(
+          in oklab,
+          var(--color-on-surface) 20%,
+          transparent
+        );
+        border-width: 1px;
+        border-style: solid;
+        border-radius: var(--radius-md);
+        color: var(--color-on-surface);
       }
       #top-nav-buttons,
       #bottom-nav-buttons {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 0.5rem;
+      }
+      #top-nav-buttons {
+        padding-bottom: calc(var(--spacing) * 2);
+        border-bottom-color: color-mix(
+          in oklab,
+          var(--color-on-surface) 20%,
+          transparent
+        );
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+      }
+      #bottom-nav-buttons {
+        padding-top: calc(var(--spacing) * 2);
+        border-top-color: color-mix(
+          in oklab,
+          var(--color-on-surface) 20%,
+          transparent
+        );
+        border-top-width: 1px;
+        border-top-style: solid;
       }
       #reading-preferences-button {
         grid-column: 1 / -1; /* full-width first row on narrow screens */
@@ -246,7 +280,15 @@
           }
         }
         #body {
-          padding-inline: calc(var(--padding) * 6);
+          margin-inline: calc(var(--padding) * 6);
+          padding-block: calc(var(--spacing) * 6);
+          padding-inline: calc(var(--spacing) * 6);
+        }
+        #top-nav-buttons {
+          padding-bottom: calc(var(--spacing) * 4);
+        }
+        #bottom-nav-buttons {
+          padding-top: calc(var(--spacing) * 4);
         }
         #top-prev-button::after,
         #bottom-prev-button::after {
