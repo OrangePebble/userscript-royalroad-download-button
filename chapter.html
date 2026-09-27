@@ -29,6 +29,7 @@
         --text-base--line-height: calc(1.5/1);
         --color-surface-alt: #131313;
         --radius-md: 0.375rem;
+        --color-on-surface-muted: oklch(55.6% 0 0);
       }
       body {
         background: var(--color-surface);
@@ -128,7 +129,7 @@
       #bottom-nav-buttons {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 0.5rem;
+        gap: calc(var(--spacing) * 1);
       }
       #top-nav-buttons {
         padding-bottom: calc(var(--spacing) * 2);
@@ -149,6 +150,7 @@
         );
         border-top-width: 1px;
         border-top-style: solid;
+        padding-bottom: calc(var(--spacing) * 2);
       }
       #reading-preferences-button {
         grid-column: 1 / -1; /* full-width first row on narrow screens */
@@ -257,6 +259,23 @@
       #top-next-button::after,
       #bottom-next-button::after {
         content: "Next ➡";
+      }
+      #dates {
+        display: flex;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+      }
+      time {
+        color: var(--color-on-surface-muted);
+        font-weight: var(--font-weight-light);
+        line-height: calc(var(--spacing) * 7);
+        margin-left: calc(var(--spacing) * 6);
+      }
+      #created-date::before {
+        content: "🗒";
+      }
+      #edited-date::before {
+        content: "🖉 ";
       }
       @media (min-width: 48rem) {
         #header {
@@ -421,8 +440,8 @@
           <a id="bottom-next-button" href="https://example.com"></a>
         </div>
         <div id="dates">
-          <span id="created-date"></span>
-          <span id="edited-date"></span>
+          <time id="created-date">19/8/2023, 15:35</time>
+          <time id="edited-date">9/9/2026, 21:33</time>
         </div>
       </div>
     </div>

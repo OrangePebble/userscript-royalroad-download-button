@@ -87,7 +87,7 @@ const CHAPTER_REGEX = new RegExp(
 const CORRUPTED_CHAPTER_REGEX = new RegExp(
   /^https:\/\/www.royalroad.com\/fiction\/chapter\/(\d+)\/?[^\/]*$/,
 );
-const IS_OLD_UI = document.getElementById("beta-switcher") !== null;
+const IS_LEGACY_UI = document.getElementById("beta-switcher") !== null;
 
 const PARSER = new DOMParser();
 
@@ -97,7 +97,7 @@ const PARSER = new DOMParser();
 let chapter_list;
 
 (async () => {
-  if (!IS_OLD_UI) {
+  if (!IS_LEGACY_UI) {
     if (FICTION_REGEX.test(window.location.href)) {
       addFictionButton();
 
