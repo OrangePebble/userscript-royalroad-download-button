@@ -119,6 +119,9 @@ let chapter_list;
       "orangepebble-confirm-download-button",
     );
     confirm.addEventListener("click", async () => {
+      disableButton();
+      setProgress(0);
+
       let start_chapter_select = document.getElementById(
         "orangepebble-start-chapter-select",
       );
@@ -170,8 +173,15 @@ let chapter_list;
           created_date,
           edited_date,
         });
+        setProgress(((i + 1) / chosen_chapters_list.length) * (3 / 4));
       }
-      downloadMultiHtml(fiction_title, author, cover_url, processed_chapters);
+      await downloadMultiHtml(
+        fiction_title,
+        author,
+        cover_url,
+        processed_chapters,
+      );
+      enableButton();
     });
   }
 })();

@@ -10,9 +10,6 @@ async function downloadMultiHtml(fiction_title, author, cover_url, chapters) {
     return;
   }
 
-  disableButton();
-  setProgress(0);
-
   try {
     const zip = new JSZip();
     const archive_name = filenamePart(fiction_title) || "royal-road-fiction";
@@ -34,7 +31,7 @@ async function downloadMultiHtml(fiction_title, author, cover_url, chapters) {
           chapter_filenames[index + 1] ?? null,
         ),
       );
-      setProgress((index + 1) / chapters.length);
+      setProgress(((index + 1) / chapters.length) * (2 / 12) + 3 / 4);
     }
 
     const blob = await zip.generateAsync({
@@ -48,8 +45,6 @@ async function downloadMultiHtml(fiction_title, author, cover_url, chapters) {
     alert(
       "Failed to create the chapter download. More information is in the console.",
     );
-  } finally {
-    enableButton();
   }
 }
 
